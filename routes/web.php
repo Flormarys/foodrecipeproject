@@ -15,6 +15,17 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/ingr/edit', function () {
+    return view('ingr.edit');
+});
+Route::get('/ingr/show', function () {
+    return view('ingr.show');
+});
+Route::get('/ingr/create', function () {
+    return view('ingr.create');
+});
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
