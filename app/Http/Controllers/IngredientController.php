@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Ingredients;
 use Illuminate\Http\Request;
+use App\AvailableIngredients;
+use Illuminate\Support\Facades\DB;
 
 class IngredientController extends Controller
 {
@@ -14,7 +16,7 @@ class IngredientController extends Controller
      */
     public function index()
     {
-        //
+        return view('index');
     }
 
     /**
@@ -24,7 +26,13 @@ class IngredientController extends Controller
      */
     public function create()
     {
-        //
+        $allIngredients = AvailableIngredients::all();
+        $unitMeasure = DB::table('available_ingredients')
+                     ->select(DB::raw('distinct unit as unity'))
+                     ->whereNotNull('unit')
+                     ->get();
+        $dbInformation = array($allIngredients, $unitMeasure);
+        return view('ingr.create')->with('dbInfo', $dbInformation);
     }
 
     /**
@@ -35,7 +43,17 @@ class IngredientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+          'name' => 'required',
+          'price' => 'required',
+          'quantity' => 'required',
+          'measure' => 'required'
+        ]);
+
+        $ingredients = new Ingredients;
+        $ingredients->assignFromRequest($request);
+        $ingredients->save();
+        return redirect('/home')->with('success', 'Added Ingredient');
     }
 
     /**
@@ -46,7 +64,7 @@ class IngredientController extends Controller
      */
     public function show(Ingredients $ingredients)
     {
-        //
+        return view('ingr.show');
     }
 
     /**
@@ -57,7 +75,7 @@ class IngredientController extends Controller
      */
     public function edit(Ingredients $ingredients)
     {
-        //
+        return view('ingr.edit');
     }
 
     /**

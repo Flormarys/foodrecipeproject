@@ -10,8 +10,8 @@
                   <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
                      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                         <a class="dropdown-item" href="ingr/show">List of Ingredients</a>
-                         <a class="dropdown-item" href="#">Another action</a>
+                         <a class="dropdown-item" href="show">List of Ingredients</a>
+                         <a class="dropdown-item" href="create">Upload a new Ingredient</a>
                          <a class="dropdown-item" href="/home">Record</a>
                      </div>
                  </li>

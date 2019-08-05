@@ -11,28 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+// Routs List for the IngredientController
 
-Route::get('/ingr/edit', function () {
-    return view('ingr.edit');
-});
-Route::get('/ingr/show', function () {
-    return view('ingr.show');
-});
-Route::get('/ingr/create', function () {
-    return view('ingr.create');
-});
+Route::get('/', 'IngredientController@index');
+Route::get('/edit', 'IngredientController@edit');
+Route::get('/show', 'IngredientController@show');
+Route::get('/create', 'IngredientController@create');
+Route::post('/create', 'IngredientController@store');
 
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
