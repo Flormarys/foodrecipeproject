@@ -3,12 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Ingredients;
+use App\User;
 use Illuminate\Http\Request;
 use App\AvailableIngredients;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+
 
 class IngredientController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -41,10 +49,9 @@ class IngredientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, User $user)
     {
         $this->validate($request,[
-          'name' => 'required',
           'price' => 'required',
           'quantity' => 'required',
           'measure' => 'required'
@@ -52,6 +59,7 @@ class IngredientController extends Controller
 
         $ingredients = new Ingredients;
         $ingredients->assignFromRequest($request);
+        $ingredients->user_id = Auth::id();
         $ingredients->save();
         return redirect('/home')->with('success', 'Added Ingredient');
     }

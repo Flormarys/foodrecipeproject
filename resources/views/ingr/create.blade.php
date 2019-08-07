@@ -11,9 +11,9 @@
           <div class="form-row">
             <div class="form-group col-md-6">
             <label for="title">Product Title</label>
-              <select class="form-control">
+              <select name="available_ingredient_id" class="form-control">
                 @foreach($dbInfo[0] as $ingreds)
-                    <option value="{{$ingreds->name}}">{{$ingreds->name}}</option>
+                    <option value="{{$ingreds->id}}">{{$ingreds->name}}</option>
                 @endforeach
                </select>
             </div>
@@ -26,7 +26,7 @@
           <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="title">Measure</label>
-              <select class="form-control">
+              <select name="measure" class="form-control">
                 @foreach($dbInfo[1] as $unitInfo)
                     <option value="{{$unitInfo->unity}}">{{$unitInfo->unity}}</option>
                 @endforeach

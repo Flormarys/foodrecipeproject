@@ -22,7 +22,7 @@ class AvailableIngredientsSeeder extends Seeder
                 ->request(
                     'GET',
                     "https://api.spoonacular.com/food/ingredients/autocomplete?" .
-                    "query=$letter&number=3&metaInformation=true&apiKey=c5c136ed8d36442a8ece991083b4bd20"
+                    "query=$letter&number=7&metaInformation=true&apiKey=c5c136ed8d36442a8ece991083b4bd20"
                 );
             $ingredients = json_decode($response->getBody());
             foreach ($ingredients as $ing) {
