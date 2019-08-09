@@ -5,7 +5,9 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use App\Ingredients;
+use App\Historic_recipes;
 
 class User extends Authenticatable
 {
@@ -38,9 +40,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function Ingredients()
+    public function userIngredients()
     {
         return $this->hasMany('App\Ingredients');
+    }
+
+    public function userHistoricRecipes()
+    {
+        return $this->hasMany('App\Historic_recipes');
     }
 
 }

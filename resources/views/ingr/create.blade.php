@@ -12,7 +12,7 @@
             <div class="form-group col-md-6">
             <label for="title">Product Title</label>
               <select name="available_ingredient_id" class="form-control">
-                @foreach($dbInfo[0] as $ingreds)
+                @foreach($ingred_info[0] as $ingreds)
                     <option value="{{$ingreds->id}}">{{$ingreds->name}}</option>
                 @endforeach
                </select>
@@ -27,7 +27,7 @@
             <div class="form-group col-md-6">
                 <label for="title">Measure</label>
               <select name="measure" class="form-control">
-                @foreach($dbInfo[1] as $unitInfo)
+                @foreach($ingred_info[1] as $unitInfo)
                     <option value="{{$unitInfo->unity}}">{{$unitInfo->unity}}</option>
                 @endforeach
                </select>

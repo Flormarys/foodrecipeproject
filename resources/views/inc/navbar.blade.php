@@ -5,18 +5,13 @@
         </button>
 
             <!-- Left Side Of Navbar -->
-            <div class="collapse navbar-collapse">
-              <ul class="navbar-nav mr-auto">
-                  <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
-                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                         <a class="dropdown-item" href="show">List of Ingredients</a>
-                         <a class="dropdown-item" href="create">Upload a new Ingredient</a>
-                         <a class="dropdown-item" href="/home">Record</a>
-                     </div>
-                 </li>
-              </ul>
-            </div>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                  <li class="nav-item active">
+                      <a class="nav-link" href="/">List of Ingredients</a>
+                  </li>
+                </ul>
+              </div>
 
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">

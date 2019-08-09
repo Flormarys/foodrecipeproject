@@ -1,19 +1,19 @@
-{{-- @extends('layouts.app')
+@extends('layouts.app')
 
 @section('content')
 <div class="jumbotron">
       <h3>Ingredient</h3>
           <br>
-          <p><b>Name:</b> {{$ingred->name}}</p>
+          <p><b>Name:</b> {{$ingredients->name}}</p>
 
-          <p><b>Price:</b> {!!$ingred->price!!}</p>
+          {{-- <p><b>Price:</b> {!!$ingredients->price!!}</p>
 
-          <p><b>Quantity:</b> {!!$ingred->quantity!!}</p>
+          <p><b>Quantity:</b> {!!$ingredients->quantity!!}</p> --}}
 
           <p><b>Measure:</b>
 
         <br>
-
+{{--
       <hr>
       <small>Written on {{$ingred->created_at}}</small>
       <small>Last update {{$ingred->updated_at}}</small>
@@ -29,6 +29,6 @@
         {{Form::hidden('_method', 'POST')}}
         {{Form::submit('Delete', ['class' =>'btn btn-outline-danger'])}}
         {!!Form::close()!!}
-        </div>
+        </div> --}}
   </div>
-@endsection --}}
+@endsection

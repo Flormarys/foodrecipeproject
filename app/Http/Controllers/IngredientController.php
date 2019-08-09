@@ -24,7 +24,8 @@ class IngredientController extends Controller
      */
     public function index()
     {
-        return view('index');
+        $ingredients = Ingredients::where('user_id', '=', Auth::id())->with('available_ingredient')->get();
+        return view('index')->with('ingredient_info', $ingredients);
     }
 
     /**
@@ -39,8 +40,8 @@ class IngredientController extends Controller
                      ->select(DB::raw('distinct unit as unity'))
                      ->whereNotNull('unit')
                      ->get();
-        $dbInformation = array($allIngredients, $unitMeasure);
-        return view('ingr.create')->with('dbInfo', $dbInformation);
+        $ingredients_Information = array($allIngredients, $unitMeasure);
+        return view('ingr.create')->with('ingred_info', $ingredients_Information);
     }
 
     /**
@@ -70,9 +71,10 @@ class IngredientController extends Controller
      * @param  \App\Ingredients  $ingredients
      * @return \Illuminate\Http\Response
      */
-    public function show(Ingredients $ingredients)
+    public function show($id)
     {
-        return view('ingr.show');
+        $ingredients = Ingredients::find($id);
+        return view('ingr.show')->with('ingredients', $ingredients);
     }
 
     /**
