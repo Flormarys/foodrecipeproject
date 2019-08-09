@@ -12,12 +12,25 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @if(count($ingredient_info) >0)
-                        @foreach ($ingredient_info as $ingredient)
+                    @if(count($ingredient_list) >0)
+                        @foreach ($ingredient_list as $ingredient)
                             <tr>
                                 <td>{!!$ingredient->available_ingredient->name!!}</td>
                                 <td>{!!$ingredient->quantity!!}</td>
-                                <td></td>
+                                <td>
+                                   <div class="btn-group btn-group-sm">
+                                     {!!Form::open(['action' =>['IngredientController@show', $ingredient->id], 'method' => 'GET'])!!}
+                                     {{Form::submit('View', ['class' =>'btn btn-outline-primary'])}}
+                                     {!!Form::close()!!}
+                                     {!!Form::open(['action' =>['IngredientController@edit', $ingredient->id], 'method' => 'GET'])!!}
+                                     {{Form::submit('Edit', ['class' =>'btn btn-outline-success'])}}
+                                     {!!Form::close()!!}
+                                     {{-- {!!Form::open(['action' =>['PropertyController@destroy', $property->id], 'method' => 'POST'])!!}
+                                     {{Form::hidden('_method', 'POST')}}
+                                     {{Form::submit('Delete', ['class' =>'btn btn-outline-danger'])}}
+                                     {!!Form::close()!!} --}}
+                                     </div>
+                                 </td>
                             </tr>
                         @endforeach
                   </tbody>

@@ -24,8 +24,10 @@ class IngredientController extends Controller
      */
     public function index()
     {
-        $ingredients = Ingredients::where('user_id', '=', Auth::id())->with('available_ingredient')->get();
-        return view('index')->with('ingredient_info', $ingredients);
+        $ingredients = Ingredients::where('user_id', '=', Auth::id())
+                                    ->with('available_ingredient')
+                                    ->get();
+        return view('index')->with('ingredient_list', $ingredients);
     }
 
     /**
@@ -35,13 +37,8 @@ class IngredientController extends Controller
      */
     public function create()
     {
-        $allIngredients = AvailableIngredients::all();
-        $unitMeasure = DB::table('available_ingredients')
-                     ->select(DB::raw('distinct unit as unity'))
-                     ->whereNotNull('unit')
-                     ->get();
-        $ingredients_Information = array($allIngredients, $unitMeasure);
-        return view('ingr.create')->with('ingred_info', $ingredients_Information);
+        $available_ingredients = AvailableIngredients::all();
+        return view('ingredients.create')->with('ingredients_info', $available_ingredients);
     }
 
     /**
@@ -55,14 +52,13 @@ class IngredientController extends Controller
         $this->validate($request,[
           'price' => 'required',
           'quantity' => 'required',
-          'measure' => 'required'
         ]);
 
         $ingredients = new Ingredients;
         $ingredients->assignFromRequest($request);
         $ingredients->user_id = Auth::id();
         $ingredients->save();
-        return redirect('/home')->with('success', 'Added Ingredient');
+        return redirect('/')->with('success', 'Added Ingredient');
     }
 
     /**
@@ -73,8 +69,12 @@ class IngredientController extends Controller
      */
     public function show($id)
     {
-        $ingredients = Ingredients::find($id);
-        return view('ingr.show')->with('ingredients', $ingredients);
+        $ingredients = Ingredients::where('user_id', '=', Auth::id())
+            ->where('id', '=', $id)
+            ->with('available_ingredient')
+            ->get()
+            ->first();
+        return view('ingredients.show')->with('ingredient_info', $ingredients);
     }
 
     /**
@@ -83,9 +83,16 @@ class IngredientController extends Controller
      * @param  \App\Ingredients  $ingredients
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ingredients $ingredients)
+    public function edit($id)
     {
-        return view('ingr.edit');
+        $available_ingredients = AvailableIngredients::all();
+        $ingredients = Ingredients::where('user_id', '=', Auth::id())
+            ->where('id', '=', $id)
+            ->with('available_ingredient')
+            ->get()
+            ->first();
+        $ingredients_info = array($available_ingredients, $ingredients);
+        return view('ingredients.edit')->with('ingredients', $ingredients_info);
     }
 
     /**

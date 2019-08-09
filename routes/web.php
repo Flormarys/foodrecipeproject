@@ -14,10 +14,21 @@
 // Routs List for the IngredientController
 
 Route::get('/', 'IngredientController@index');
-Route::get('/edit', 'IngredientController@edit');
-Route::get('/show', 'IngredientController@show');
-Route::get('/create', 'IngredientController@create');
-Route::post('/create', 'IngredientController@store');
+
+Route::get('ingredients/create', 'IngredientController@create');
+
+Route::post('ingredients/create', 'IngredientController@store');
+
+Route::get('ingredients/show/{id}', 'IngredientController@show');
+
+Route::get('ingredients/edit/{id}', 'IngredientController@edit');
+
+Route::put('ingredients/edit/{id}', 'IngredientController@update');
+
+
+
+
+// Route::post('/{id}', 'IngredientController@destroy');
 
 
 Auth::routes();

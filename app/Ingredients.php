@@ -21,7 +21,6 @@ class Ingredients extends Model
     public function assignFromRequest(Request $request){
         $this->price = $request->input('price');
         $this->quantity = $request->input('quantity');
-        $this->measure = $request->input('measure');
         $this->available_ingredient_id = $request->input('available_ingredient_id');
     }
 
