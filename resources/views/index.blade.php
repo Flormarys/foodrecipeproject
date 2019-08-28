@@ -25,10 +25,10 @@
                                      {!!Form::open(['action' =>['IngredientController@edit', $ingredient->id], 'method' => 'GET'])!!}
                                      {{Form::submit('Edit', ['class' =>'btn btn-outline-success'])}}
                                      {!!Form::close()!!}
-                                     {{-- {!!Form::open(['action' =>['PropertyController@destroy', $property->id], 'method' => 'POST'])!!}
+                                     {!!Form::open(['action' =>['IngredientController@destroy', $ingredient->id], 'method' => 'POST'])!!}
                                      {{Form::hidden('_method', 'POST')}}
                                      {{Form::submit('Delete', ['class' =>'btn btn-outline-danger'])}}
-                                     {!!Form::close()!!} --}}
+                                     {!!Form::close()!!}
                                      </div>
                                  </td>
                             </tr>

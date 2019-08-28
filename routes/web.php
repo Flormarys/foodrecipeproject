@@ -23,12 +23,9 @@ Route::get('ingredients/show/{id}', 'IngredientController@show');
 
 Route::get('ingredients/edit/{id}', 'IngredientController@edit');
 
-Route::put('ingredients/edit/{id}', 'IngredientController@update');
+Route::post('ingredients/edit/{id}', 'IngredientController@update');
 
-
-
-
-// Route::post('/{id}', 'IngredientController@destroy');
+Route::post('/{id}', 'IngredientController@destroy');
 
 
 Auth::routes();

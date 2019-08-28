@@ -85,14 +85,12 @@ class IngredientController extends Controller
      */
     public function edit($id)
     {
-        $available_ingredients = AvailableIngredients::all();
         $ingredients = Ingredients::where('user_id', '=', Auth::id())
             ->where('id', '=', $id)
             ->with('available_ingredient')
             ->get()
             ->first();
-        $ingredients_info = array($available_ingredients, $ingredients);
-        return view('ingredients.edit')->with('ingredients', $ingredients_info);
+        return view('ingredients.edit')->with('ingredients', $ingredients);
     }
 
     /**
@@ -102,9 +100,18 @@ class IngredientController extends Controller
      * @param  \App\Ingredients  $ingredients
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ingredients $ingredients)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+          'price' => 'required',
+          'quantity' => 'required',
+        ]);
+
+        $ingredients = Ingredients::find($id);
+        $ingredients->price = $request->input('price');
+        $ingredients->quantity = $request->input('quantity');
+        $ingredients->save();
+        return redirect('/')->with('success', 'Edited Ingredient');
     }
 
     /**
@@ -113,8 +120,10 @@ class IngredientController extends Controller
      * @param  \App\Ingredients  $ingredients
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ingredients $ingredients)
+    public function destroy($id)
     {
-        //
+        $ingredients = Ingredients::find($id);
+        $ingredients->delete();
+        return redirect('/')->with('success', 'Deleted Ingredient');
     }
 }

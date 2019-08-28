@@ -15,7 +15,6 @@
         <br>
 
       <hr>
-      <small>Written on {{$ingredient_info->created_at}}</small>
       <small>Last update {{$ingredient_info->updated_at}}</small>
       <hr>
       <div class="btn-group btn-group-sm">
@@ -25,10 +24,10 @@
         {!!Form::open(['action' =>['IngredientController@edit', $ingredient_info->id], 'method' => 'GET'])!!}
         {{Form::submit('Edit', ['class' =>'btn btn-outline-success'])}}
         {!!Form::close()!!}
-        {{-- {!!Form::open(['action' =>['IngredientController@destroy', $ingredient_info->id], 'method' => 'POST'])!!}
+        {!!Form::open(['action' =>['IngredientController@destroy', $ingredient_info->id], 'method' => 'POST'])!!}
         {{Form::hidden('_method', 'POST')}}
         {{Form::submit('Delete', ['class' =>'btn btn-outline-danger'])}}
-        {!!Form::close()!!} --}}
+        {!!Form::close()!!}
         </div>
   </div>
 @endsection
