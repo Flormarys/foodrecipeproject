@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Saved_Recipes;
+use App\SavedRecipes;
 use Illuminate\Http\Request;
 
-class Saved_RecipeController extends Controller
+class SavedRecipeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class Saved_RecipeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Saved_Recipes  $saved_Recipes
+     * @param  \App\SavedRecipes  $savedRecipes
      * @return \Illuminate\Http\Response
      */
-    public function show(Saved_Recipes $saved_Recipes)
+    public function show(SavedRecipes $savedRecipes)
     {
         //
     }
@@ -52,10 +52,10 @@ class Saved_RecipeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Saved_Recipes  $saved_Recipes
+     * @param  \App\SavedRecipes  $savedRecipes
      * @return \Illuminate\Http\Response
      */
-    public function edit(Saved_Recipes $saved_Recipes)
+    public function edit(SavedRecipes $savedRecipes)
     {
         //
     }
@@ -64,10 +64,10 @@ class Saved_RecipeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Saved_Recipes  $saved_Recipes
+     * @param  \App\SavedRecipes  $savedRecipes
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Saved_Recipes $saved_Recipes)
+    public function update(Request $request, SavedRecipes $savedRecipes)
     {
         //
     }
@@ -75,10 +75,10 @@ class Saved_RecipeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Saved_Recipes  $saved_Recipes
+     * @param  \App\SavedRecipes  $savedRecipes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Saved_Recipes $saved_Recipes)
+    public function destroy(SavedRecipes $savedRecipes)
     {
         //
     }

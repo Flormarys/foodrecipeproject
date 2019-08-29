@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 
-class Historic_recipes extends Model
+class HistoricRecipes extends Model
 {
     public function user()
 {

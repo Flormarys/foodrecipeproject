@@ -7,7 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use App\Ingredients;
-use App\Historic_recipes;
+use App\HistoricRecipes;
 
 class User extends Authenticatable
 {
@@ -47,7 +47,7 @@ class User extends Authenticatable
 
     public function userHistoricRecipes()
     {
-        return $this->hasMany('App\Historic_recipes');
+        return $this->hasMany('App\HistoricRecipes');
     }
 
 }

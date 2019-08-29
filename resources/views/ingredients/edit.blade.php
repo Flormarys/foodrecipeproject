@@ -25,11 +25,11 @@
            </div>
           </div>
           <div class="btn-group btn-group">
-            {!!Form::open(['action' =>['IngredientController@edit', $ingredients->id], 'method' => 'GET'])!!}
-            {{Form::submit('Edit', ['class' =>'btn btn-outline-success'])}}
-            {!!Form::close()!!}
             {!!Form::open(['action' =>['IngredientController@index'], 'method' => 'GET'])!!}
             {{Form::submit('Go Back', ['class' =>'btn btn-outline-primary'])}}
+            {!!Form::close()!!}
+            {!!Form::open(['action' =>['IngredientController@edit', $ingredients->id], 'method' => 'GET'])!!}
+            {{Form::submit('Edit', ['class' =>'btn btn-outline-success'])}}
             {!!Form::close()!!}
             {!!Form::open(['action' =>['IngredientController@destroy', $ingredients->id], 'method' => 'POST'])!!}
             {{Form::hidden('_method', 'POST')}}

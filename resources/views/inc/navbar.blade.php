@@ -10,6 +10,9 @@
                   <li class="nav-item active">
                       <a class="nav-link" href="/">List of Ingredients</a>
                   </li>
+                  <li class="nav-item active">
+                      <a class="nav-link" href="/recipes">List of Recipes</a>
+                  </li>
                 </ul>
               </div>
 
