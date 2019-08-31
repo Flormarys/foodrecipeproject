@@ -39,5 +39,5 @@
         @else
             <p>No Ingredients found</p>
         @endif
-
+        <a href="/ingredients/create" class="btn btn-outline-primary">Upload a New Ingredient</a>
 @endsection

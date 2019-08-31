@@ -24,17 +24,17 @@
                 <input type="number" name="price" value="{{$ingredients->price}}">
            </div>
           </div>
-          <div class="btn-group btn-group">
-            {!!Form::open(['action' =>['IngredientController@index'], 'method' => 'GET'])!!}
-            {{Form::submit('Go Back', ['class' =>'btn btn-outline-primary'])}}
-            {!!Form::close()!!}
-            {!!Form::open(['action' =>['IngredientController@edit', $ingredients->id], 'method' => 'GET'])!!}
-            {{Form::submit('Edit', ['class' =>'btn btn-outline-success'])}}
-            {!!Form::close()!!}
-            {!!Form::open(['action' =>['IngredientController@destroy', $ingredients->id], 'method' => 'POST'])!!}
-            {{Form::hidden('_method', 'POST')}}
-            {{Form::submit('Delete', ['class' =>'btn btn-outline-danger'])}}
-            {!!Form::close()!!}
+          <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+
+                <a href="/" class="btn btn-outline-primary">Go Back</a>
+
+                <button type="submit" class="btn btn-outline-success">Edit</button>
+
+
             </div>
+    </form>
+    <form method="POST" action="/ingredients/{{$ingredients->id}}" enctype="multipart/form-data">
+        <button type="submit" class="btn btn-outline-danger">Delete</button>
+          @csrf
     </form>
 @endsection

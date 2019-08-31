@@ -60,7 +60,7 @@ class RecipeListController extends Controller
                 }
             }
         }
-        dd($allRecipes);
-        return view('recipes')->with($allRecipes);
+
+        return view('recipes')->with('listingRecipes', $allRecipes);
     }
 }
