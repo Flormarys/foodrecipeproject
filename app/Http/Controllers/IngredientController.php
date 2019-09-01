@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
 
+
 class IngredientController extends Controller
 {
     public function __construct()
@@ -26,7 +27,7 @@ class IngredientController extends Controller
     {
         $ingredients = Ingredients::where('user_id', '=', Auth::id())
                                     ->with('available_ingredient')
-                                    ->get();
+                                    ->paginate(7);
         return view('index')->with('ingredient_list', $ingredients);
     }
 

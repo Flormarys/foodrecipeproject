@@ -35,6 +35,7 @@
                         @endforeach
                   </tbody>
                 </table>
+                {{ $ingredient_list->links() }}
           <br>
         @else
             <p>No Ingredients found</p>

@@ -13,7 +13,7 @@
                     @if(count($listingRecipes) > 0)
                         @foreach ($listingRecipes as $recipes)
                             <tr>
-                                <td>{!!$recipes->title!!}</td>
+                                <td>{!!$recipes["title"]!!}</td>
                                 <td></td>
                             </tr>
                         @endforeach

@@ -41,26 +41,35 @@ class RecipeListController extends Controller
             ->request(
                 'GET',
                 "https://api.spoonacular.com/recipes/findByIngredients?" .
-                "ingredients=$name&number=10&apiKey=c5c136ed8d36442a8ece991083b4bd20"
+                "ingredients=$name&number=10&apiKey=3c12fdd3f3e441e6bfad202fff49de0e"
             );
         $fulllist = json_decode($response->getBody());
 
         foreach ($fulllist as $recipe) {
-            if($recipe->missedIngredientCount == 0) {
-                foreach ($recipe->usedIngredients as $ingredientRecipe) {
-                    if ($userIngredients[$ingredientRecipe->name] >= $ingredientRecipe->amount) {
-                        $allRecipes[] =[
-                             'recipe_id' => $recipe->id,
-                             'title' => $recipe->title,
-                             'recipeImage' => $recipe->image,
-                             'imageType' => $recipe->imageType,
-                             'ingredients' => $recipe->usedIngredients
-                         ];
-                    }
+            $countMissedIngredients = 0;
+            $countMissedAmount = 0;
+            foreach ($recipe->usedIngredients as $ingredientRecipe) {
+                if(!isset($userIngredients[$ingredientRecipe->name])) {
+                    $countMissedIngredients++;
+                }
+                if (isset($userIngredients[$ingredientRecipe->name]) && $userIngredients[$ingredientRecipe->name] < $ingredientRecipe->amount){
+                    $countMissedAmount++;
                 }
             }
+            if(
+                ($countMissedIngredients == 0 && $countMissedAmount == 0) ||
+                ($countMissedIngredients == 0 && $countMissedAmount < 3) ||
+                ($countMissedIngredients < 3 && $countMissedAmount == 0)
+            ) {
+                $allRecipes[] =[
+                    'recipe_id' => $recipe->id,
+                    'title' => $recipe->title,
+                    'recipeImage' => $recipe->image,
+                    'imageType' => $recipe->imageType,
+                    'ingredients' => $recipe->usedIngredients
+                ];
+            }
         }
-
         return view('recipes')->with('listingRecipes', $allRecipes);
     }
 }
