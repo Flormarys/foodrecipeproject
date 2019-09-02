@@ -20,9 +20,9 @@ Route::get('ingredients/edit/{id}', 'IngredientController@edit');
 Route::post('ingredients/edit/{id}', 'IngredientController@update');
 Route::post('ingredients/{id}', 'IngredientController@destroy');
 
-// Routs List for the
+// Routs List for the RecipeListController
 Route::get('recipes', 'RecipeListController@index');
-
+Route::get('recipes/show/{id}', 'RecipeListController@show');
 
 
 Auth::routes();

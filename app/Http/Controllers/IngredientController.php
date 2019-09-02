@@ -38,7 +38,7 @@ class IngredientController extends Controller
      */
     public function create()
     {
-        $available_ingredients = AvailableIngredients::all();
+        $available_ingredients = AvailableIngredients::orderBy('name', 'asc')->get();
         return view('ingredients.create')->with('ingredients_info', $available_ingredients);
     }
 

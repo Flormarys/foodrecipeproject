@@ -41,19 +41,24 @@ class RecipeListController extends Controller
             ->request(
                 'GET',
                 "https://api.spoonacular.com/recipes/findByIngredients?" .
-                "ingredients=$name&number=10&apiKey=3c12fdd3f3e441e6bfad202fff49de0e"
+                "ingredients=$name&number=100&apiKey=3c12fdd3f3e441e6bfad202fff49de0e"
             );
         $fulllist = json_decode($response->getBody());
-
         foreach ($fulllist as $recipe) {
             $countMissedIngredients = 0;
             $countMissedAmount = 0;
+            $missedIngredientsList = [];
+            $missedAmounts = 0;
+            $missedUnit = [];
             foreach ($recipe->usedIngredients as $ingredientRecipe) {
                 if(!isset($userIngredients[$ingredientRecipe->name])) {
                     $countMissedIngredients++;
+                    $missedIngredientsList [] = $ingredientRecipe->name;
+                    $missedUnit []= $ingredientRecipe->unit;
                 }
                 if (isset($userIngredients[$ingredientRecipe->name]) && $userIngredients[$ingredientRecipe->name] < $ingredientRecipe->amount){
                     $countMissedAmount++;
+                    $missedAmounts = $ingredientRecipe->amount;
                 }
             }
             if(
@@ -66,10 +71,40 @@ class RecipeListController extends Controller
                     'title' => $recipe->title,
                     'recipeImage' => $recipe->image,
                     'imageType' => $recipe->imageType,
-                    'ingredients' => $recipe->usedIngredients
+                    'ingredients' => $recipe->usedIngredients,
+                    'countMissedIngredients' => $countMissedIngredients,
+                    'missedIngredients' => $missedIngredientsList,
+                    'countMissedAmount' => $countMissedAmount,
+                    'missedUnit' => $missedUnit,
+                    'missedAmount' => $missedAmounts
                 ];
             }
         }
-        return view('recipes')->with('listingRecipes', $allRecipes);
+
+        return view('recipes.recipes')->with('listingRecipes', $allRecipes);
+    }
+
+    public function show($recipe_id){
+        $client = new Client();
+        $response = $client
+            ->request(
+                'GET',
+                "https://api.spoonacular.com/recipes/$recipe_id" .
+                "/information?includeNutrition=false" .
+                "&apiKey=3c12fdd3f3e441e6bfad202fff49de0e"
+            );
+        $recipeDetails = json_decode($response->getBody());
+        $fullRecipeInformation = [
+                'recipe_id' => $recipeDetails->id,
+                'title' => $recipeDetails->title,
+                'image' => $recipeDetails->image,
+                'imageType' => $recipeDetails->imageType,
+                'readyInMinutes' => $recipeDetails->readyInMinutes,
+                'servings' => $recipeDetails->servings,
+                'sourceUrl' => $recipeDetails->sourceUrl,
+                'ingredients' => $recipeDetails->extendedIngredients
+            ];
+
+        return view('recipes.show')->with('fullRecipe', $fullRecipeInformation);
     }
 }
