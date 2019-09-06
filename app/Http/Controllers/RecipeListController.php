@@ -41,70 +41,99 @@ class RecipeListController extends Controller
             ->request(
                 'GET',
                 "https://api.spoonacular.com/recipes/findByIngredients?" .
-                "ingredients=$name&number=100&apiKey=3c12fdd3f3e441e6bfad202fff49de0e"
+                "ingredients=$name&number=100&apiKey=c5c136ed8d36442a8ece991083b4bd20"
             );
         $fulllist = json_decode($response->getBody());
         foreach ($fulllist as $recipe) {
             $countMissedIngredients = 0;
-            $countMissedAmount = 0;
+            $countMissedQuantity = 0;
             $missedIngredientsList = [];
-            $missedAmounts = 0;
-            $missedUnit = [];
-            foreach ($recipe->usedIngredients as $ingredientRecipe) {
+            $missedQuantity = [];
+            $fullIngredients = [];
+            foreach ($recipe->usedIngredients as $ingredientRecipe){
+                $fullIngredients[] =
+                    $ingredientRecipe->name . ", " .
+                    $ingredientRecipe->amount . ", " .
+                    $ingredientRecipe->unit;
+
                 if(!isset($userIngredients[$ingredientRecipe->name])) {
                     $countMissedIngredients++;
-                    $missedIngredientsList [] = $ingredientRecipe->name;
-                    $missedUnit []= $ingredientRecipe->unit;
+                    $missedIngredientsList [] =
+                        "Name: " . $ingredientRecipe->name . ", " .
+                        "Quantity: " . $ingredientRecipe->amount . ", " .
+                        "Unit: ". $ingredientRecipe->unit;
+
                 }
                 if (isset($userIngredients[$ingredientRecipe->name]) && $userIngredients[$ingredientRecipe->name] < $ingredientRecipe->amount){
-                    $countMissedAmount++;
-                    $missedAmounts = $ingredientRecipe->amount;
+                    $countMissedQuantity++;
+                    $missedQuantity []=
+                        $ingredientRecipe->name . ", " .
+                        $ingredientRecipe->amount . ", " .
+                        $ingredientRecipe->unit;
                 }
             }
             if(
-                ($countMissedIngredients == 0 && $countMissedAmount == 0) ||
-                ($countMissedIngredients == 0 && $countMissedAmount < 3) ||
-                ($countMissedIngredients < 3 && $countMissedAmount == 0)
+                ($countMissedIngredients == 0 && $countMissedQuantity == 0) ||
+                ($countMissedIngredients == 0 && $countMissedQuantity < 3) ||
+                ($countMissedIngredients < 3 && $countMissedQuantity == 0)
             ) {
                 $allRecipes[] =[
                     'recipe_id' => $recipe->id,
                     'title' => $recipe->title,
                     'recipeImage' => $recipe->image,
                     'imageType' => $recipe->imageType,
-                    'ingredients' => $recipe->usedIngredients,
+                    'ingredients' => $fullIngredients,
                     'countMissedIngredients' => $countMissedIngredients,
                     'missedIngredients' => $missedIngredientsList,
-                    'countMissedAmount' => $countMissedAmount,
-                    'missedUnit' => $missedUnit,
-                    'missedAmount' => $missedAmounts
+                    'countMissedQuantity' => $countMissedQuantity,
+                    'missedQuantity' => $missedQuantity,
                 ];
             }
         }
-
         return view('recipes.recipes')->with('listingRecipes', $allRecipes);
     }
 
-    public function show($recipe_id){
-        $client = new Client();
-        $response = $client
-            ->request(
-                'GET',
-                "https://api.spoonacular.com/recipes/$recipe_id" .
-                "/information?includeNutrition=false" .
-                "&apiKey=3c12fdd3f3e441e6bfad202fff49de0e"
-            );
-        $recipeDetails = json_decode($response->getBody());
-        $fullRecipeInformation = [
-                'recipe_id' => $recipeDetails->id,
-                'title' => $recipeDetails->title,
-                'image' => $recipeDetails->image,
-                'imageType' => $recipeDetails->imageType,
-                'readyInMinutes' => $recipeDetails->readyInMinutes,
-                'servings' => $recipeDetails->servings,
-                'sourceUrl' => $recipeDetails->sourceUrl,
-                'ingredients' => $recipeDetails->extendedIngredients
-            ];
+    public function show(Request $request, $recipe_id){
+            $recipeFromView = [
+                'recipe_id' =>$request->input('recipe_id'),
+                'title' => $request->input('title'),
+                'recipeImage' => $request->input('recipeImage'),
+                'imageType' => $request->input('imageType'),
+                'ingredients' => $request->input('ingredients'),
+                'countMissedIngredients' => $request->input('countMissedIngredients'),
+                'missedIngredients' => $request->input('missedIngredients'),
+                'countMissedQuantity' => $request->input('countMissedQuantity'),
+                'missedQuantity' => $request->input('missedQuantity')
+                ];
 
-        return view('recipes.show')->with('fullRecipe', $fullRecipeInformation);
-    }
+            $client = new Client();
+            $response = $client
+                ->request(
+                    'GET',
+                    "https://api.spoonacular.com/recipes/$recipe_id" .
+                    "/information?includeNutrition=false" .
+                    "&apiKey=3c12fdd3f3e441e6bfad202fff49de0e"
+                );
+            $recipeDetails = json_decode($response->getBody());
+            $fullIngredient = [];
+            foreach ($recipeDetails->extendedIngredients as $extendedIngredients) {
+                $fullIngredient []=
+                "Name: " . $extendedIngredients->name . ", " .
+                "Quantity: " . $extendedIngredients->amount . ", " .
+                "Unit: ". $extendedIngredients->unit;
+            }
+            $fullRecipeInformation = [
+                    'recipe_id' => $recipeDetails->id,
+                    'title' => $recipeDetails->title,
+                    'image' => $recipeDetails->image,
+                    'imageType' => $recipeDetails->imageType,
+                    'readyInMinutes' => $recipeDetails->readyInMinutes,
+                    'servings' => $recipeDetails->servings,
+                    'sourceUrl' => $recipeDetails->sourceUrl,
+                    'ingredients' => $fullIngredient,
+                ];
+            $bothRecipeInformation = [$recipeFromView, $fullRecipeInformation];
+            return view('recipes.show')->with('fullRecipe', $bothRecipeInformation);
+        }
+
 }

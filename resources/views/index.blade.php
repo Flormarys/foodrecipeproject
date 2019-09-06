@@ -1,7 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-
+    <br>
+    <a href="/ingredients/create" class="btn btn-outline-primary">Upload a New Ingredient</a>
+    <br>
+    <br>
     <table class="table table-hover">
             <h4><div class="card-header">Ingredients</div></h4>
                   <thead>
@@ -40,5 +43,4 @@
         @else
             <p>No Ingredients found</p>
         @endif
-        <a href="/ingredients/create" class="btn btn-outline-primary">Upload a New Ingredient</a>
 @endsection
