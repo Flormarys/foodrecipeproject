@@ -133,7 +133,42 @@ class RecipeListController extends Controller
                     'ingredients' => $fullIngredient,
                 ];
             $bothRecipeInformation = [$recipeFromView, $fullRecipeInformation];
-            return view('recipes.show')->with('fullRecipe', $bothRecipeInformation);
+    return view('recipes.show')->with('fullRecipe', $bothRecipeInformation);
+    }
+
+    public function store(Request $request, $recipe_id)
+    {
+        $client = new Client();
+        $response = $client
+            ->request(
+                'GET',
+                "https://api.spoonacular.com/recipes/$recipe_id" .
+                "/information?includeNutrition=false" .
+                "&apiKey=3c12fdd3f3e441e6bfad202fff49de0e"
+            );
+        $recipeDetails = json_decode($response->getBody());
+        $ingredientRecipeId = [];
+        $ingredientQuantity = [];
+        foreach ($recipeDetails->extendedIngredients as $extendedIngredients) {
+            $ingredientRecipeId []= $extendedIngredients->id;
+            $ingredientQuantity [$extendedIngredients->id]= $extendedIngredients->amount;
         }
+        $usedIngredients = Ingredients::whereHas('available_ingredient',
+            function($q) use($ingredientRecipeId)
+            {
+                $q->whereIn('api_id', $ingredientRecipeId);
+            })
+            ->with('available_ingredient')
+            ->where('user_id', '=', Auth::id())
+            ->get();
+        foreach ($usedIngredients as $usedIngredient) {
+            $usedIngredient->quantity = $usedIngredient->quantity
+                - $ingredientQuantity[$usedIngredient->available_ingredient->api_id];
+            $usedIngredient->save();
+        }
+        dd($usedIngredients);
+
+        return redirect('/')->with();
+    }
 
 }
