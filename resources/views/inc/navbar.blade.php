@@ -8,10 +8,13 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                   <li class="nav-item active">
-                      <a class="nav-link" href="/">List of Ingredients</a>
+                      <a class="nav-link" href="/">Ingredients</a>
                   </li>
                   <li class="nav-item active">
-                      <a class="nav-link" href="/recipes">List of Recipes</a>
+                      <a class="nav-link" href="/recipes">Recipes</a>
+                  </li>
+                  <li class="nav-item active">
+                      <a class="nav-link" href="/recipes/historic">Historical</a>
                   </li>
                 </ul>
               </div>

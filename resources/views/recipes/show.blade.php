@@ -31,9 +31,10 @@
               @foreach ($fullRecipe[1]["ingredients"] as $missedIngredientsList)
                   <p>{!!$missedIngredientsList!!}</p>
               @endforeach
-              {!!Form::open(['action' =>['RecipeListController@store', $fullRecipe[1]["recipe_id"]], 'method' => 'POST'])!!}
-              {{Form::submit('Use Recipe', ['class' =>'btn btn-outline-success'])}}
-              {!!Form::close()!!}
+              <form method="POST" action="/recipes/select{!!$fullRecipe[0]["recipe_id"]!!}" enctype="multipart/form-data">
+                  <button type="submit" class="btn btn-outline-success">Use Recipe</button>
+                  @csrf
+              </form>
           @endif
           {!!Form::open(['action' =>['RecipeListController@index'], 'method' => 'GET'])!!}
           {{Form::submit('Go Back', ['class' =>'btn btn-outline-primary'])}}

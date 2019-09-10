@@ -23,7 +23,6 @@ Route::post('ingredients/{id}', 'IngredientController@destroy');
 // Routs List for the RecipeListController
 Route::get('recipes', 'RecipeListController@index');
 Route::post('recipes/show/{id}', 'RecipeListController@show');
-Route::post('recipes/show/{id}', 'RecipeListController@store');
-
+Route::post('recipes/select{id}', 'RecipeListController@store');
 
 Auth::routes();

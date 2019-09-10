@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Ingredients;
 use App\User;
 use App\AvailableIngredients;
+use App\HistoricRecipes;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -64,7 +65,10 @@ class RecipeListController extends Controller
                         "Unit: ". $ingredientRecipe->unit;
 
                 }
-                if (isset($userIngredients[$ingredientRecipe->name]) && $userIngredients[$ingredientRecipe->name] < $ingredientRecipe->amount){
+                if (
+                    isset($userIngredients[$ingredientRecipe->name]) &&
+                    $userIngredients[$ingredientRecipe->name] < $ingredientRecipe->amount
+                ){
                     $countMissedQuantity++;
                     $missedQuantity []=
                         $ingredientRecipe->name . ", " .
@@ -149,11 +153,12 @@ class RecipeListController extends Controller
         $recipeDetails = json_decode($response->getBody());
         $ingredientRecipeId = [];
         $ingredientQuantity = [];
+
         foreach ($recipeDetails->extendedIngredients as $extendedIngredients) {
             $ingredientRecipeId []= $extendedIngredients->id;
             $ingredientQuantity [$extendedIngredients->id]= $extendedIngredients->amount;
         }
-        $usedIngredients = Ingredients::whereHas('available_ingredient',
+        $userIngredients = Ingredients::whereHas('available_ingredient',
             function($q) use($ingredientRecipeId)
             {
                 $q->whereIn('api_id', $ingredientRecipeId);
@@ -161,14 +166,31 @@ class RecipeListController extends Controller
             ->with('available_ingredient')
             ->where('user_id', '=', Auth::id())
             ->get();
-        foreach ($usedIngredients as $usedIngredient) {
-            $usedIngredient->quantity = $usedIngredient->quantity
-                - $ingredientQuantity[$usedIngredient->available_ingredient->api_id];
-            $usedIngredient->save();
-        }
-        dd($usedIngredients);
 
-        return redirect('/')->with();
+        $total_cost = 0;
+        foreach ($userIngredients as $userIngredient) {
+
+            $previousQuantity = $userIngredient->quantity;
+
+            $userIngredient->quantity = $userIngredient->quantity
+                - $ingredientQuantity[$userIngredient->available_ingredient->api_id];
+
+            $usedQuantity = $ingredientQuantity
+            [$userIngredient->available_ingredient->api_id];
+
+            $total_cost = $total_cost + $usedQuantity * $userIngredient->price / $previousQuantity;
+            $userIngredient->save();
+
+        }
+
+        $historicRecipe = new HistoricRecipes;
+        $historicRecipe->user_id = Auth::id();
+        $historicRecipe->total_cost = $total_cost;
+        $historicRecipe->recipe_link = $recipeDetails->sourceUrl;
+        $historicRecipe->recipe_id = $recipeDetails->id;
+        $historicRecipe->save();
+
+        return redirect('recipes')->with('Have a nice meal');
     }
 
 }
