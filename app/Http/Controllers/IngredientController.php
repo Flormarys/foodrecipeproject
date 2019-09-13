@@ -27,7 +27,7 @@ class IngredientController extends Controller
     {
         $ingredients = Ingredients::where('user_id', '=', Auth::id())
                                     ->with('available_ingredient')
-                                    ->paginate(7);
+                                    ->paginate(10);
         return view('index')->with('ingredient_list', $ingredients);
     }
 

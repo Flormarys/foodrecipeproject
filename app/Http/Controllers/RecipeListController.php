@@ -188,6 +188,7 @@ class RecipeListController extends Controller
         $historicRecipe->total_cost = $total_cost;
         $historicRecipe->recipe_link = $recipeDetails->sourceUrl;
         $historicRecipe->recipe_id = $recipeDetails->id;
+        $historicRecipe->recipe_name = $recipeDetails->title;
         $historicRecipe->save();
 
         return redirect('recipes')->with('Have a nice meal');
