@@ -22,16 +22,19 @@
                                 <td>{!!$ingredient->quantity!!}</td>
                                 <td>
                                    <div class="btn-group btn-group-sm">
-                                     {!!Form::open(['action' =>['IngredientController@show', $ingredient->id], 'method' => 'GET'])!!}
-                                     {{Form::submit('View', ['class' =>'btn btn-outline-primary'])}}
-                                     {!!Form::close()!!}
-                                     {!!Form::open(['action' =>['IngredientController@edit', $ingredient->id], 'method' => 'GET'])!!}
-                                     {{Form::submit('Edit', ['class' =>'btn btn-outline-success'])}}
-                                     {!!Form::close()!!}
-                                     {!!Form::open(['action' =>['IngredientController@destroy', $ingredient->id], 'method' => 'POST'])!!}
-                                     {{Form::hidden('_method', 'POST')}}
-                                     {{Form::submit('Delete', ['class' =>'btn btn-outline-danger'])}}
-                                     {!!Form::close()!!}
+                                       <form action="/ingredients/show/{!!$ingredient->id!!}" method="GET">
+                                           <button type="submit" class="btn btn-outline-primary">View</button>
+                                       </form>
+                                       <form method="GET" action="/ingredients/edit/{!!$ingredient->id!!}"
+                                       enctype="multipart/form-data">
+                                           <button type="submit" class="btn btn-outline-success">Edit</button>
+                                           @csrf
+                                       </form>
+                                       <form method="POST" action="/ingredients/{!!$ingredient->id!!}"
+                                       enctype="multipart/form-data">
+                                           <button type="submit" class="btn btn-outline-danger">Delete</button>
+                                           @csrf
+                                       </form>
                                      </div>
                                  </td>
                             </tr>

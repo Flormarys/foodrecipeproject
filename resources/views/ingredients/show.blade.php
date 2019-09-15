@@ -13,16 +13,19 @@
                 <small>Last update {{$ingredient_info->updated_at}}</small>
             <hr>
             <div class="btn-group btn-group-sm">
-                {!!Form::open(['action' =>['IngredientController@index'], 'method' => 'GET'])!!}
-                {{Form::submit('Go Back', ['class' =>'btn btn-outline-primary'])}}
-                {!!Form::close()!!}
-                {!!Form::open(['action' =>['IngredientController@edit', $ingredient_info->id], 'method' => 'GET'])!!}
-                {{Form::submit('Edit', ['class' =>'btn btn-outline-success'])}}
-                {!!Form::close()!!}
-                {!!Form::open(['action' =>['IngredientController@destroy', $ingredient_info->id], 'method' => 'POST'])!!}
-                {{Form::hidden('_method', 'POST')}}
-                {{Form::submit('Delete', ['class' =>'btn btn-outline-danger'])}}
-                {!!Form::close()!!}
+                <form action="/recipes" method="GET">
+                    <button type="submit" class="btn btn-outline-primary">Go Back</button>
+                </form>
+                <form method="GET" action="/ingredients/edit/{!!$ingredient_info->id!!}"
+                enctype="multipart/form-data">
+                    <button type="submit" class="btn btn-outline-success">Edit</button>
+                    @csrf
+                </form>
+                <form method="POST" action="/ingredients/{!!$ingredient_info->id!!}"
+                enctype="multipart/form-data">
+                    <button type="submit" class="btn btn-outline-danger">Delete</button>
+                    @csrf
+                </form>
             </div>
     </div>
 @endsection

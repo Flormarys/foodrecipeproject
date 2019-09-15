@@ -27,5 +27,6 @@ Route::post('recipes/select{id}', 'RecipeListController@store');
 
 // Routes List for the HistoricRecipeController
 Route::get('historic', 'HistoricRecipeController@index');
+Route::post('historic', 'HistoricRecipeController@index');
 
 Auth::routes();

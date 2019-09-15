@@ -38,9 +38,9 @@
                     @csrf
                 </form>
             @endif
-            {!!Form::open(['action' =>['RecipeListController@index'], 'method' => 'GET'])!!}
-            {{Form::submit('Go Back', ['class' =>'btn btn-outline-primary'])}}
-            {!!Form::close()!!}
+            <form action="/recipes" method="GET">
+                <button type="submit" class="btn btn-outline-primary">Go Back</button>
+            </form>
         <br>
     </div>
 @endsection

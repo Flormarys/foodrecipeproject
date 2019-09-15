@@ -169,8 +169,9 @@ class RecipeListController extends Controller
 
         $total_cost = 0;
         foreach ($userIngredients as $userIngredient) {
-
-            $previousQuantity = $userIngredient->quantity;
+            if($userIngredient->quantity != 0){
+                $previousQuantity = $userIngredient->quantity;
+            }
 
             $userIngredient->quantity = $userIngredient->quantity
                 - $ingredientQuantity[$userIngredient->available_ingredient->api_id];

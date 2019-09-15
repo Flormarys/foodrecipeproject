@@ -2,10 +2,11 @@
 
 @section('content')
         <table class="table table-hover">
-            <h4><div class="card-header">Ingredients</div></h4>
+            <br>
+            <h4><div class="card-header">Recipe List</div></h4>
                 <thead>
                     <tr>
-                        <th scope="col">Recipes</th>
+                        <th scope="col">Name</th>
                         <th scope="col">Missed Ingredients</th>
                         <th scope="col">Misse Quantities</th>
                         <th scope="col">Actions</th>
