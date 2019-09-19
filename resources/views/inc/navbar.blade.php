@@ -19,13 +19,10 @@
                   <li class="nav-item active">
                       <a class="nav-link" href="/users/edit">Edit User</a>
                   </li>
-                  <li class="nav-item active">
-                        <a class="nav-link" href="/register">Register</a>
-                  </li>
                 </ul>
               </div>
 
-            <!-- Right Side Of Navbar -->
+
             <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -44,8 +41,8 @@
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
-                                <div class="nav-item">
-                                    <a class= class="nav-item active" href="{{ route('logout') }}"
+                                <div class="nav-item active">
+                                    <a class="nav-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
