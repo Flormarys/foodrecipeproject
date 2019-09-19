@@ -4,8 +4,7 @@
     <div class="jumbotron">
         <h3>Recipe</h3>
             <br>
-            @if ($fullRecipe[0]["countMissedIngredients"] != "0" &&
-            $fullRecipe[0]["missedIngredients"] != NULL)
+            @if ($fullRecipe[0]["countMissedIngredients"] != "0" && $fullRecipe[0]["missedIngredients"] != NULL)
                 <p><b>Recipe: </b> {!!$fullRecipe[0]["title"]!!}</p>
                 <p><b>Missed Ingredients: </b> {!!$fullRecipe[0]["countMissedIngredients"]!!}</p>
                 <p><b>Missing Ingredients: </b></p>
@@ -17,8 +16,8 @@
                 <p><b>Recipe: </b> {!!$fullRecipe[0]["title"]!!}</p>
                 <p><b>Missed Quantity: </b> {!!$fullRecipe[0]["countMissedQuantity"]!!}</p>
                 <p><b>Missing Ingredients: </b></p>
-                @foreach ($fullRecipe[0]["missedIngredients"] as $missedIngredientsList)
-                    <p>{!!$missedIngredientsList!!}</p>
+                @foreach ($fullRecipe[0]["missedQuantity"] as $missedQuantity)
+                    <p>{!!$missedQuantity!!}</p>
                 @endforeach
             @endif
             @if ($fullRecipe[0]["countMissedIngredients"] == "0" &&
@@ -26,6 +25,10 @@
                 <p><b>Recipe: </b> {!!$fullRecipe[1]["title"]!!}</p>
                 <p><b>Ready In Minutes: </b> {!!$fullRecipe[1]["readyInMinutes"]!!}</p>
                 <p><b>Servings: </b> {!!$fullRecipe[1]["servings"]!!}</p>
+                <p><b>Dish Tipes: </b></p>
+                @foreach ($fullRecipe[1]["dishTypes"] as $dishType)
+                    <p>{!!$dishType!!}</p>
+                @endforeach
                 <p><b>Ingredients: </b></p>
                 @foreach ($fullRecipe[1]["ingredients"] as $missedIngredientsList)
                     <p>{!!$missedIngredientsList!!}</p>

@@ -42,9 +42,11 @@ class RecipeListController extends Controller
             ->request(
                 'GET',
                 "https://api.spoonacular.com/recipes/findByIngredients?" .
-                "ingredients=$name&number=100&apiKey=c5c136ed8d36442a8ece991083b4bd20"
+                "ingredients=$name&number=50&apiKey=9cd222b498f14197a9fa66d9e3c08722"
             );
+
         $fulllist = json_decode($response->getBody());
+
         foreach ($fulllist as $recipe) {
             $countMissedIngredients = 0;
             $countMissedQuantity = 0;
@@ -94,6 +96,7 @@ class RecipeListController extends Controller
                 ];
             }
         }
+
         return view('recipes.recipes')->with('listingRecipes', $allRecipes);
     }
 
@@ -116,7 +119,7 @@ class RecipeListController extends Controller
                     'GET',
                     "https://api.spoonacular.com/recipes/$recipe_id" .
                     "/information?includeNutrition=false" .
-                    "&apiKey=3c12fdd3f3e441e6bfad202fff49de0e"
+                    "&apiKey=9cd222b498f14197a9fa66d9e3c08722"
                 );
             $recipeDetails = json_decode($response->getBody());
             $fullIngredient = [];
@@ -135,6 +138,7 @@ class RecipeListController extends Controller
                     'servings' => $recipeDetails->servings,
                     'sourceUrl' => $recipeDetails->sourceUrl,
                     'ingredients' => $fullIngredient,
+                    'dishTypes' => $recipeDetails->dishTypes,
                 ];
             $bothRecipeInformation = [$recipeFromView, $fullRecipeInformation];
     return view('recipes.show')->with('fullRecipe', $bothRecipeInformation);
@@ -148,7 +152,7 @@ class RecipeListController extends Controller
                 'GET',
                 "https://api.spoonacular.com/recipes/$recipe_id" .
                 "/information?includeNutrition=false" .
-                "&apiKey=3c12fdd3f3e441e6bfad202fff49de0e"
+                "&apiKey=9cd222b498f14197a9fa66d9e3c08722"
             );
         $recipeDetails = json_decode($response->getBody());
         $ingredientRecipeId = [];

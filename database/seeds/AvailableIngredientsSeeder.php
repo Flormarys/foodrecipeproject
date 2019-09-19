@@ -3,8 +3,9 @@
 use Illuminate\Database\Seeder;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\DB;
+use App\Ingredients;
 
-class AvailableIngredientsSeeder extends Seeder
+class AvailableIngredientsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -22,7 +23,7 @@ class AvailableIngredientsSeeder extends Seeder
                 ->request(
                     'GET',
                     "https://api.spoonacular.com/food/ingredients/autocomplete?" .
-                    "query=$letter&number=7&metaInformation=true&apiKey=c5c136ed8d36442a8ece991083b4bd20"
+                    "query=$letter&number=10&metaInformation=true&apiKey=c5c136ed8d36442a8ece991083b4bd20"
                 );
             $ingredients = json_decode($response->getBody());
             foreach ($ingredients as $ing) {
@@ -32,7 +33,7 @@ class AvailableIngredientsSeeder extends Seeder
                     ->request(
                         'GET',
                         "https://api.spoonacular.com/food/ingredients/$idIng/information" .
-                        "?apiKey=c5c136ed8d36442a8ece991083b4bd20"
+                        "?apiKey=3c12fdd3f3e441e6bfad202fff49de0e"
                     );
                 $ingredientInfo = json_decode($response2->getBody());
                 $unit = null;
@@ -50,5 +51,6 @@ class AvailableIngredientsSeeder extends Seeder
             }
         }
         DB::table('available_ingredients')->insert($allIngredients);
+
     }
 }

@@ -29,4 +29,8 @@ Route::post('recipes/select{id}', 'RecipeListController@store');
 Route::get('historic', 'HistoricRecipeController@index');
 Route::post('historic', 'HistoricRecipeController@index');
 
+// Routes List for the UserController
+Route::get('users/edit', 'UserController@edit');
+Route::post('users/update', 'UserController@update');
+
 Auth::routes();

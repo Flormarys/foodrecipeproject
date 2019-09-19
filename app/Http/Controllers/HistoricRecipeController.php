@@ -19,7 +19,7 @@ class HistoricRecipeController extends Controller
      */
     public function index(Request $request)
     {
-        $historic = new HistoricRecipes;
+        $historic = HistoricRecipes::where('user_id', '=', Auth::id());
 
         if($request->has('dateFrom') && $request->has('dateTo')){
             $historic = $historic->dateFilter($request->dateFrom, $request->dateTo);
