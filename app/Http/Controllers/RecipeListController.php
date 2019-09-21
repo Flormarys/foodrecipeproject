@@ -14,6 +14,11 @@ use GuzzleHttp\Client;
 
 class RecipeListController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $client = new Client();
