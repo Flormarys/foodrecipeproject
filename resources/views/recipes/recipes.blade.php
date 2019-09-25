@@ -2,10 +2,9 @@
 
 @section('content')
     <div class="container-fluid">
-        <h3 class="h3 mb-2 text-gray-800">All the recipes that you can cook according to your ingredients</h3>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">List of Recipes</h6>
+            <h4 class="m-0 font-weight-bold text-info">List of Recipes</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -18,7 +17,7 @@
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 247px;">Name</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 116px;">Missed Ingredients</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 116px;">Missed Quantities</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 116px;">Actions</th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 50px;">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -54,7 +53,12 @@
                                                                 @endforeach
                                                             </select>
                                                         </div>
-                                                        <button type="submit" class="btn btn-outline-primary">View</button>
+                                                        <button type="submit" class="btn btn-info btn-circle">
+                                                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
+                                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                                                <circle cx="12" cy="12" r="3"></circle>
+                                                            </svg>
+                                                        </button>
                                                     </form>
                                                 </td>
                                             </tr>

@@ -2,10 +2,9 @@
 
 @section('content')
 <div class="container-fluid">
-    <h1 class="h3 mb-2 text-gray-800">History of Recipes Made</h1>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Filter by Date</h6>
+            <h4 class="m-0 font-weight-bold text-info">History of Recipes Made</h4>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -13,21 +12,27 @@
                     <div class="row">
                         <form action="/historic" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="form-row">
-                                  <div class="col-sm-5 col-md-5">
-                                      <label>From</label>
-                                          <input type="text" class="form-control" name="dateFrom" id="dateFrom" placeholder="1999-01-01">
-                                  </div>
-                                  <div class="col-sm-5 col-md-5">
-                                      <label for="dateTo">To</label>
-                                          <input type="text" class="form-control" name="dateTo" id="dateTo" placeholder="1999-01-01">
-                                  </div>
-                                  <div class="col-sm-2 col-md-2">
-                                      <button type="submit" class="btn btn-outline-success">Send</button>
-                                  </div>
+
+                            <div class="d-flex justify-content-between">
+                                    <div class="col-4 col-md-4">
+                                            <input type="text" class="form-control" name="dateFrom" id="dateFrom" placeholder="From: 1999-01-01">
+                                    </div>
+                                    <div class="col-4 col-md-4">
+                                            <input type="text" class="form-control" name="dateTo" id="dateTo" placeholder="To: 1999-01-01">
+                                    </div>
+                                    <a href="#" class="btn btn-success btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
+                                                <circle cx="11" cy="11" r="8"></circle>
+                                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                            </svg>
+                                        </span>
+                                        <span class="text">Filter By Date</span>
+                                      </a>
                             </div>
                         </form>
                     </div>
+                    <br>
                     <div class="row">
                         <div class="col-sm-12">
                             <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
