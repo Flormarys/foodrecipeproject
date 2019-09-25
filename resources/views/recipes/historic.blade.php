@@ -12,7 +12,6 @@
                     <div class="row">
                         <form action="/historic" method="POST" enctype="multipart/form-data">
                             @csrf
-
                             <div class="d-flex justify-content-between">
                                     <div class="col-4 col-md-4">
                                             <input type="text" class="form-control" name="dateFrom" id="dateFrom" placeholder="From: 1999-01-01">
@@ -20,16 +19,13 @@
                                     <div class="col-4 col-md-4">
                                             <input type="text" class="form-control" name="dateTo" id="dateTo" placeholder="To: 1999-01-01">
                                     </div>
-                                    <a href="#" class="btn btn-success btn-icon-split">
+                                    <button type="submit" class="btn btn-success btn-icon-split">
                                         <span class="icon text-white-50">
-                                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
-                                                <circle cx="11" cy="11" r="8"></circle>
-                                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                                            </svg>
+                                            <i class="fas fa-search"></i>
                                         </span>
                                         <span class="text">Filter By Date</span>
-                                      </a>
-                            </div>
+                                    </button>
+                                </div>
                         </form>
                     </div>
                     <br>

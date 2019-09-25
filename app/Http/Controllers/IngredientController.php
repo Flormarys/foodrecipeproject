@@ -28,6 +28,11 @@ class IngredientController extends Controller
         $ingredients = Ingredients::where('user_id', '=', Auth::id())
                                     ->with('available_ingredient')
                                     ->paginate(10);
+
+        // if ($request->has('ingredient_name')) {
+        //   $ingredients = $ingredients->where('title', 'like', '%'. $request->input('title').'%');
+        // }
+
         return view('index')->with('ingredient_list', $ingredients);
     }
 

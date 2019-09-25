@@ -21,14 +21,15 @@ class HistoricRecipeController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index(Request $request)
     {
-        $historic = HistoricRecipes::where('user_id', '=', Auth::id());
+        $historic = new HistoricRecipes;
 
         if($request->has('dateFrom') && $request->has('dateTo')){
             $historic = $historic->dateFilter($request->dateFrom, $request->dateTo);
         }
+        $historic = $historic->where('user_id', '=', Auth::id());
         $historics = $historic->get();
         $totalPrice = 0;
         foreach ($historics as $historic_price) {

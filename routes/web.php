@@ -13,6 +13,7 @@
 
 // Routes List for the IngredientController
 Route::get('/', 'IngredientController@index');
+Route::post('/', 'IngredientController@index');
 Route::get('ingredients/create', 'IngredientController@create');
 Route::post('ingredients/create', 'IngredientController@store');
 Route::get('ingredients/show/{id}', 'IngredientController@show');

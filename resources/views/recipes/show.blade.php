@@ -40,20 +40,14 @@
     <div class="row">
         <div class="col-1">
             <a href="{!!$fullRecipe[1]["sourceUrl"]!!}" target="_blank" class="btn btn-warning btn-circle m-1">
-                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
-                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-                </svg>
+                <i class="fas fa-external-link-alt"></i>
             </a>
         </div>
         <div class="col-1">
             <form method="POST" action="/recipes/select{!!$fullRecipe[0]["recipe_id"]!!}"
                 enctype="multipart/form-data">
                 <button type="submit" class="btn btn-success btn-circle m-1">
-                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
-                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                    </svg>
+                    <i class="fas fa-thumbtack"></i>
                 </button>
                 @csrf
             </form>
@@ -61,10 +55,7 @@
             @endif
         <div class="col-1">
             <a href="/recipes" class="btn btn-info btn-circle m-1">
-                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                </svg>
+                <i class="fas fa-undo-alt"></i>
             </a>
         </div>
     </div>
