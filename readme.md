@@ -1,7 +1,7 @@
 # FoodRecipes Project
 
-This project allows to users insert different ingredients and the system will suggest recipes with available ingredients and will calculate costs for each recipes.  
-Additionally allows check recipes history and the total spent on all recipes. .  
+This project allows users to insert different ingredients and the system will suggest recipes with the available ingredients and will calculate costs for each recipes.  
+Additionally, it allows to check recipes history and the total spent on all recipes.
 
 This system was created using PHP 7.2, Laravel 5.8 and MySQL v 5.x
 
@@ -26,5 +26,6 @@ This system was created using PHP 7.2, Laravel 5.8 and MySQL v 5.x
  with your MySQL settings.
 5. Run migrations `php artisan migrate`
 6. Run seeds `php artisan db:seed` it will create a user:
+
 `User: test@user.com`
 `Password: user1234`

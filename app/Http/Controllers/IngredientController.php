@@ -23,15 +23,12 @@ class IngredientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $ingredients = Ingredients::where('user_id', '=', Auth::id())
-                                    ->with('available_ingredient')
-                                    ->paginate(10);
-
-        // if ($request->has('ingredient_name')) {
-        //   $ingredients = $ingredients->where('title', 'like', '%'. $request->input('title').'%');
-        // }
+                                    ->whereHas('available_ingredient',  function ($query) use ($request){
+                                        $query->where('name', 'like', '%'.$request->input('name').'%');
+                                    })->with('available_ingredient')->get();
 
         return view('index')->with('ingredient_list', $ingredients);
     }

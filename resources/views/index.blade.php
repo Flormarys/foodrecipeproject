@@ -11,11 +11,11 @@
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
                                 <div class="col-sm">
-                                    <a href="/ingredients/create" class="btn btn-success btn-icon-split">
+                                    <a href="/" class="btn btn-success btn-icon-split">
                                         <span class="icon text-white-50">
-                                          <i class="far fa-edit"></i>
+                                          <i class="fas fa-trash-restore"></i>
                                         </span>
-                                        <span class="text">Upload a New Ingredient</span>
+                                        <span class="text">Restore</span>
                                     </a>
                                 </div>
                             <div class="col-sm">
@@ -23,7 +23,7 @@
                                     @csrf
                                     <div id="dataTable_filter" class="dataTables_filter">
                                         <label>Search:
-                                            <input type="text" class="form-control form-control-sm" placeholder="" name="ingredient_name" aria-controls="dataTable">
+                                            <input type="text" class="form-control form-control-sm" placeholder="" name="name" aria-controls="dataTable">
                                         </label>
                                     </div>
                                 </form>
@@ -76,7 +76,7 @@
                             <div class="col-sm-12 col-md-7">
                                 <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
                                     <ul class="pagination">
-                                        {{ $ingredient_list->links() }}
+                                        {{-- {{ $ingredient_list->links() }} --}}
                                     </ul>
                                 </div>
                             </div>

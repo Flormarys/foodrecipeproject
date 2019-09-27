@@ -14,6 +14,7 @@
                                 <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                     <thead>
                                         <tr role="row">
+                                                                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 50px;">Foto</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 247px;">Name</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 116px;">Missed Ingredients</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 116px;">Missed Quantities</th>
@@ -24,6 +25,7 @@
                                         @if(count($listingRecipes) > 0)
                                             @foreach ($listingRecipes as $recipes)
                                             <tr role="row" class="odd">
+                                                <td><img src="{!!$recipes["recipeImage"]!!}" style="width:60px"></td>
                                                 <td>{!!$recipes["title"]!!}</td>
                                                 <td>{!!$recipes["countMissedIngredients"]!!}</td>
                                                 <td>{!!$recipes["countMissedQuantity"]!!}</td>
@@ -33,7 +35,6 @@
                                                         <input type="hidden" name="recipe_id" value={!!$recipes["recipe_id"]!!}>
                                                         <input type="hidden" name="title" value={!!$recipes["title"]!!}>
                                                         <input type="hidden" name="recipeImage" value={!!$recipes["recipeImage"]!!}>
-                                                        <input type="hidden" name="imageType" value={!!$recipes["imageType"]!!}>
                                                         <input type="hidden" name="countMissedIngredients" value={!!$recipes["countMissedIngredients"]!!}>
                                                         <input type="hidden" name="countMissedQuantity" value={!!$recipes["countMissedQuantity"]!!}>
                                                         <div style="display:none" >

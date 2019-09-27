@@ -18,7 +18,7 @@ class RecipeListController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index()
     {
         $client = new Client();
@@ -92,7 +92,6 @@ class RecipeListController extends Controller
                     'recipe_id' => $recipe->id,
                     'title' => $recipe->title,
                     'recipeImage' => $recipe->image,
-                    'imageType' => $recipe->imageType,
                     'ingredients' => $fullIngredients,
                     'countMissedIngredients' => $countMissedIngredients,
                     'missedIngredients' => $missedIngredientsList,
@@ -110,7 +109,6 @@ class RecipeListController extends Controller
                 'recipe_id' =>$request->input('recipe_id'),
                 'title' => $request->input('title'),
                 'recipeImage' => $request->input('recipeImage'),
-                'imageType' => $request->input('imageType'),
                 'ingredients' => $request->input('ingredients'),
                 'countMissedIngredients' => $request->input('countMissedIngredients'),
                 'missedIngredients' => $request->input('missedIngredients'),
@@ -138,7 +136,6 @@ class RecipeListController extends Controller
                     'recipe_id' => $recipeDetails->id,
                     'title' => $recipeDetails->title,
                     'image' => $recipeDetails->image,
-                    'imageType' => $recipeDetails->imageType,
                     'readyInMinutes' => $recipeDetails->readyInMinutes,
                     'servings' => $recipeDetails->servings,
                     'sourceUrl' => $recipeDetails->sourceUrl,
