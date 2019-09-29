@@ -3,7 +3,7 @@
 This **project** allows users to insert different ingredients and the system will suggest recipes with the available ingredients and will calculate costs for each recipes.  
 Additionally, it allows to check recipes history and the total spent on all recipes.
 
-![Login](public/readmefile/Login.jpg)
+![Login](./public/readmefile/Login.jpg)
 
 ## Setup Environment
 
