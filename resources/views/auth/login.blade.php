@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <body class="bg-gradient-primary">
+    <body class="bg-gradient-info">
 
       <div class="container">
 
@@ -48,7 +48,7 @@
                                   </label>
                           </div>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                        <button type="submit" class="btn btn-info btn-user btn-block">
                             {{ __('Login') }}
                         </button>
                       </form>

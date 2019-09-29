@@ -100,7 +100,6 @@ class RecipeListController extends Controller
                 ];
             }
         }
-
         return view('recipes.recipes')->with('listingRecipes', $allRecipes);
     }
 

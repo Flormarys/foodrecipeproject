@@ -3,7 +3,7 @@
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h4 class="m-0 font-weight-bold text-primary">Recipe</h4>
+            <h4 class="m-0 font-weight-bold text-info">Recipe</h4>
         </div>
             <div class="card-body">
                 @if ($fullRecipe[0]["countMissedIngredients"] != "0" && $fullRecipe[0]["missedIngredients"] != NULL)

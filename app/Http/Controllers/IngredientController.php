@@ -28,7 +28,7 @@ class IngredientController extends Controller
         $ingredients = Ingredients::where('user_id', '=', Auth::id())
                                     ->whereHas('available_ingredient',  function ($query) use ($request){
                                         $query->where('name', 'like', '%'.$request->input('name').'%');
-                                    })->with('available_ingredient')->get();
+                                    })->with('available_ingredient')->paginate(10);
 
         return view('index')->with('ingredient_list', $ingredients);
     }

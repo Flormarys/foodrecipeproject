@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<body class="bg-gradient-primary">
+<body class="bg-gradient-info">
     <div class="container">
     <div class="card o-hidden border-0 shadow-lg my-5">
         <div class="card-body p-0">
@@ -43,7 +43,7 @@
                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Repeat Password">
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                    <button type="submit" class="btn btn-info btn-user btn-block">
                         {{ __('Register') }}
                     </button>
 

@@ -23,8 +23,9 @@
 
               <!-- Page Wrapper -->
               <div id="wrapper">
-
-                 @include('inc.navbar')
+                  @if(Auth::check())
+                      @include('inc.navbar')
+                  @endif
                  <div class="container">
                      @include('inc.messages')
                      @yield('content')

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <body class="bg-gradient-primary">
+    <body class="bg-gradient-info">
       <div class="container">
         <!-- Outer Row -->
         <div class="row justify-content-center">
@@ -34,7 +34,7 @@
                                     </span>
                                 @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                        <button type="submit" class="btn btn-info btn-user btn-block">
                                     {{ __('Send Password Reset Link') }}
                         </button>
                       </form>
