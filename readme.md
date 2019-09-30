@@ -3,11 +3,10 @@
 This **project** allows users to insert different ingredients and the system will suggest recipes with the available ingredients and will calculate costs for each recipes.  
 Additionally, it allows to check recipes history and the total spent on all recipes.
 
-![alt text](public/readmefile/Login.jpg)
 
 ## Setup Environment
 
-###Applied Technology
+### Applied Technology
 This system was created using:
 * PHP 7.2
 * Laravel 5.8
