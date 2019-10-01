@@ -17,7 +17,7 @@ This system was created using:
 * MySQL
 * Composer
 
-### Steps
+### Steps  
 1. Clone this repository using GIT:
     `$ git clone git@github.com:eletita/foodrecipeproject.git`
 2. Install dependencies:
