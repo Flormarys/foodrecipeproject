@@ -1,8 +1,8 @@
 # FoodRecipes Project
 
-If you are one of the people who every day wonders what to cook, or do not know what to do with some items that you have available in your cupboard, this system is designed especially for you!
+If you are someone who every day wonders about what to cook, or do not know what to do with some items that you have available in your cupboard, this web app is the right one for you!
 
-**'FoodRecipes'** allows users to enter the ingredients that they have within their reach or that they brought from the warehouse with their respective quantities and what they pay for each one, through an API they will make the suggestion of recipes according to the user's available ingredients , with their respective cost per recipe according to the quantities and price of the ingredients used
+**'FoodRecipes'** allows users to upload the ingredients they have available at home or that they just brought from the store, with their quantities and what they paid for each item, through an API, the app will make suggestions of recipes according to the user's available ingredients , with their respective cost per recipe according to the quantities and price of the ingredients used.
 
 
 ## Setup Environment
