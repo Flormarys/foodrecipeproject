@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author  Flormarys Diaz <flormarysdiaz@gmail.com>
+ * @license GPLv3 (or any later version)
+ */
 
 namespace App\Providers;
 
@@ -7,6 +11,10 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
+/*
+*   EventServiceProvider class provides a convenient place to register all of your application's event 
+* listeners
+*/
 class EventServiceProvider extends ServiceProvider
 {
     /**

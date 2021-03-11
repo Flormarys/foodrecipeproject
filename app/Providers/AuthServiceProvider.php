@@ -1,10 +1,18 @@
 <?php
+/**
+ * @author  Flormarys Diaz <flormarysdiaz@gmail.com>
+ * @license GPLv3 (or any later version)
+ */
 
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
+/*
+*   AuthServiceProvider class contains a policies property which maps your Eloquent models to their 
+* corresponding policies
+*/
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -24,7 +32,5 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        //
     }
 }

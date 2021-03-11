@@ -1,9 +1,16 @@
 <?php
+/**
+ * @author  Flormarys Diaz <flormarysdiaz@gmail.com>
+ * @license GPLv3 (or any later version)
+ */
 
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+/*
+*   Is the place to add your application's own bootstrapping and service container bindings
+*/
 class AppServiceProvider extends ServiceProvider
 {
     /**

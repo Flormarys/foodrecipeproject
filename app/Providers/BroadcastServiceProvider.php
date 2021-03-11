@@ -1,10 +1,18 @@
 <?php
+/**
+ * @author  Flormarys Diaz <flormarysdiaz@gmail.com>
+ * @license GPLv3 (or any later version)
+ */
 
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Broadcast;
 
+/*
+*   BroadcastServiceProvider class this provider will allow you to register the broadcast authorization 
+* routes and callbacks
+*/
 class BroadcastServiceProvider extends ServiceProvider
 {
     /**
@@ -16,6 +24,6 @@ class BroadcastServiceProvider extends ServiceProvider
     {
         Broadcast::routes();
 
-        require base_path('routes/channels.php');
+        include base_path('routes/channels.php');
     }
 }

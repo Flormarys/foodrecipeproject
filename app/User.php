@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author  Flormarys Diaz <flormarysdiaz@gmail.com>
+ * @license GPLv3 (or any later version)
+ */
 
 namespace App;
 
@@ -9,6 +13,9 @@ use Illuminate\Database\Eloquent\Model;
 use App\Ingredients;
 use App\HistoricRecipes;
 
+/*
+*   The User class establishes the attributes and relationship with other models
+*/
 class User extends Authenticatable
 {
     use Notifiable;
@@ -40,11 +47,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+    * The userIngredients function establish that the user has many ingredients.
+    */
     public function userIngredients()
     {
         return $this->hasMany('App\Ingredients');
     }
 
+    /**
+    * The userHistoricRecipes function establish the use has many historic recipes.
+    */
     public function userHistoricRecipes()
     {
         return $this->hasMany('App\HistoricRecipes');

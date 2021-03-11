@@ -1,16 +1,26 @@
 <?php
+/**
+ * @author  Flormarys Diaz <flormarysdiaz@gmail.com>
+ * @license GPLv3 (or any later version)
+ */
+
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
-class dbcreate extends Command
+/*
+*   This class has the actions for create a database for the project.
+*/
+
+class DBcreate extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
+
     protected $signature = '';
 
     /**
@@ -18,7 +28,8 @@ class dbcreate extends Command
      *
      * @var string
      */
-    protected $description = 'Create a new MySQL database based on the database config file or the provided name';
+    protected 
+        $description = 'Create a new MySQL database based on the database config file or the provided name';
 
     /**
      * Create a new command instance.
@@ -39,16 +50,11 @@ class dbcreate extends Command
     public function handle()
     {
         $schemaName = $this->argument(env('DB_DATABASE')) ?: config("database.connections.mysql.database");
-        $charset = config("database.connections.mysql.charset",'utf8mb4');
-        $collation = config("database.connections.mysql.collation",'utf8mb4_unicode_ci');
-
+        $charset = config("database.connections.mysql.charset", 'utf8mb4');
+        $collation = config("database.connections.mysql.collation", 'utf8mb4_unicode_ci');
         config(["database.connections.mysql.database" => null]);
-
         $query = "CREATE DATABASE IF NOT EXISTS $schemaName CHARACTER SET $charset COLLATE $collation;";
-
         DB::statement($query);
-
         config(["database.connections.mysql.database" => $schemaName]);
-
     }
 }
