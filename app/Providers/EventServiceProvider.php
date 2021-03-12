@@ -13,7 +13,7 @@ use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 /**
- *   EventServiceProvider class provides a convenient place to register all of your 
+ * EventServiceProvider class provides a convenient place to register all of your 
  * application's event listeners
  */
 class EventServiceProvider extends ServiceProvider

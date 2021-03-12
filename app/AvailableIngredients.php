@@ -12,14 +12,18 @@ use App\Ingredients;
 use App\Http\Controllers\DB;
 
 /**
- * AvailableIngredients class use to retrieve and store information from ingredients.    
+ * AvailableIngredients class use to retrieve and store information 
+ * from ingredients.    
  */
 class AvailableIngredients extends Model
 {
     public $timestamps = true;
 
     /**
-     * The ingredients function establish that the AvailableIngredients has many Ingredients.
+     * The ingredients function establish that the AvailableIngredients 
+     * has many Ingredients.
+     *
+     * @return Response
      */
     public function ingredients()
     {

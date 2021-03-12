@@ -9,9 +9,9 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
-/*
-*   Handler class contains  methods: report and render.
-*/
+/**
+ * Handler class contains  methods: report and render.
+ */
 class Handler extends ExceptionHandler
 {
     /**
@@ -49,7 +49,6 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param \Illuminate\Http\Request $request
-     *
      * @param \Exception               $exception
      *
      * @return \Illuminate\Http\Response

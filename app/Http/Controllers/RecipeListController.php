@@ -33,6 +33,8 @@ class RecipeListController extends Controller
     /**
      * The Index function makes the call to external api to bring a recipes list 
      * with available ingredients 
+     *
+     * @return response
      */
     public function index()
     {
@@ -63,48 +65,46 @@ class RecipeListController extends Controller
 
         $fulllist = json_decode($response->getBody());
 
-        foreach ($fulllist as $recipe) {
+        foreach ( $fulllist as $recipe ) {
             $countMissedIngredients = 0;
             $countMissedQuantity = 0;
             $missedIngredientsList = [];
             $missedQuantity = [];
             $fullIngredients = [];
-            foreach ($recipe->usedIngredients as $ingredientRecipe){
-                $fullIngredients[] =
-                $ingredientRecipe->name . ", " .
-                $ingredientRecipe->amount . ", " .
-                $ingredientRecipe->unit;
+            foreach ( $recipe->usedIngredients as $ingredientRecipe ){
+                $fullIngredients[] = $ingredientRecipe->name . ", " .
+                    $ingredientRecipe->amount . ", " .
+                    $ingredientRecipe->unit;
 
-                if (!isset($userIngredients[$ingredientRecipe->name])) {
+                if (!isset($userIngredients[$ingredientRecipe->name]) ) {
                     $countMissedIngredients++;
-                    $missedIngredientsList [] =
-                    "Name: " . $ingredientRecipe->name . ", " .
-                    "Quantity: " . $ingredientRecipe->amount . ", " .
-                    "Unit: ". $ingredientRecipe->unit;
+                    $missedIngredientsList [] = "Name: " . $ingredientRecipe->name . ", " .
+                        "Quantity: " . $ingredientRecipe->amount . ", " .
+                        "Unit: ". $ingredientRecipe->unit;
                 }
                 if (isset($userIngredients[$ingredientRecipe->name])  
-                    && $userIngredients[$ingredientRecipe->name] < $ingredientRecipe->amount
-                ) {
+                    && $userIngredients[$ingredientRecipe->name] < 
+                        $ingredientRecipe->amount) 
+                {
                         $countMissedQuantity++;
-                        $missedQuantity []=
-                        $ingredientRecipe->name . ", " .
-                        $ingredientRecipe->amount . ", " .
-                        $ingredientRecipe->unit;
+                        $missedQuantity[] = $ingredientRecipe->name . ", " .
+                            $ingredientRecipe->amount . ", " .
+                            $ingredientRecipe->unit;
                 }
             }
-            if (($countMissedIngredients == 0 && $countMissedQuantity == 0) 
+            if (( $countMissedIngredients == 0 && $countMissedQuantity == 0) 
                 || ($countMissedIngredients == 0 && $countMissedQuantity < 3) 
                 || ($countMissedIngredients < 3 && $countMissedQuantity == 0) 
             ) {
                     $allRecipes[] =[
-                    'recipe_id' => $recipe->id,
-                    'title' => $recipe->title,
-                    'recipeImage' => $recipe->image,
-                    'ingredients' => $fullIngredients,
-                    'countMissedIngredients' => $countMissedIngredients,
-                    'missedIngredients' => $missedIngredientsList,
-                    'countMissedQuantity' => $countMissedQuantity,
-                    'missedQuantity' => $missedQuantity,
+                        'recipe_id' => $recipe->id,
+                        'title' => $recipe->title,
+                        'recipeImage' => $recipe->image,
+                        'ingredients' => $fullIngredients,
+                        'countMissedIngredients' => $countMissedIngredients,
+                        'missedIngredients' => $missedIngredientsList,
+                        'countMissedQuantity' => $countMissedQuantity,
+                        'missedQuantity' => $missedQuantity,
                     ];
             }
         }
@@ -112,7 +112,12 @@ class RecipeListController extends Controller
     }
 
     /**
-     * The show function show the selected recipe in the index.
+     * The show function show the selected recipe in the index. @request
+     *
+     * @param \Illuminate\Http\Request        $request
+     * @param id of recipe received from view $recipe_id
+     *
+     * @return response
      */
     public function show( Request $request, $recipe_id )
     {
@@ -137,10 +142,9 @@ class RecipeListController extends Controller
         $recipeDetails = json_decode($response->getBody());
         $fullIngredient = [];
         foreach ( $recipeDetails->extendedIngredients as $extendedIngredients ) {
-            $fullIngredient []=
-            "Name: " . $extendedIngredients->name . ", " .
-            "Quantity: " . $extendedIngredients->amount . ", " .
-            "Unit: ". $extendedIngredients->unit;
+            $fullIngredient[] = "Name: " . $extendedIngredients->name . ", " .
+                "Quantity: " . $extendedIngredients->amount . ", " .
+                "Unit: ". $extendedIngredients->unit;
         }
         $fullRecipeInformation = [
             'recipe_id' => $recipeDetails->id,
@@ -158,6 +162,11 @@ class RecipeListController extends Controller
 
     /**
      * The store function save the selected recipe and decrements the available ingredients.
+     *
+     * @param \Illuminate\Http\Request        $request
+     * @param id of recipe received from view $recipe_id
+     *
+     * @return response
      */
     public function store( Request $request, $recipe_id )
     {
@@ -175,11 +184,11 @@ class RecipeListController extends Controller
 
         foreach ($recipeDetails->extendedIngredients as $extendedIngredients) {
             $ingredientRecipeId []= $extendedIngredients->id;
-            $ingredientQuantity [$extendedIngredients->id]= $extendedIngredients->amount;
+            $ingredientQuantity[$extendedIngredients->id]= $extendedIngredients->amount;
         }
         $userIngredients = Ingredients::whereHas(
             'available_ingredient',
-            function ($q) use ($ingredientRecipeId) {
+            function ( $q ) use ( $ingredientRecipeId ) {
                 $q->whereIn('api_id', $ingredientRecipeId);
             }
         )
@@ -188,16 +197,16 @@ class RecipeListController extends Controller
             ->get();
 
         $total_cost = 0;
-        foreach ($userIngredients as $userIngredient) {
-            if ($userIngredient->quantity != 0) {
+        foreach ( $userIngredients as $userIngredient ) {
+            if ($userIngredient->quantity != 0 ) {
                 $previousQuantity = $userIngredient->quantity;
             }
 
             $userIngredient->quantity = $userIngredient->quantity
-                - $ingredientQuantity[$userIngredient->available_ingredient->api_id];
+                - $ingredientQuantity[$userIngredient->availableIngredient->api_id];
 
             $usedQuantity = $ingredientQuantity
-            [$userIngredient->available_ingredient->api_id];
+            [$userIngredient->availableIngredient->api_id];
 
             $total_cost = $total_cost + $usedQuantity * $userIngredient->price / $previousQuantity;
             $userIngredient->save();

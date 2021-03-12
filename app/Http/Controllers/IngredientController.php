@@ -35,10 +35,10 @@ class IngredientController extends Controller
     {
         $ingredients = Ingredients::where('user_id', '=', Auth::id())
             ->whereHas(
-                'available_ingredient',  function ($query) use ($request) {
+                'availableIngredient',  function ( $query ) use ( $request ) {
                     $query->where('name', 'like', '%'.$request->input('name').'%');
                 }
-            )->with('available_ingredient')->paginate(10);
+            )->with('availableIngredient')->paginate(10);
 
         return view('index')->with('ingredient_list', $ingredients);
     }
@@ -87,7 +87,7 @@ class IngredientController extends Controller
     {
         $ingredients = Ingredients::where('user_id', '=', Auth::id())
             ->where('id', '=', $id)
-            ->with('available_ingredient')
+            ->with('availableIngredient')
             ->get()
             ->first();
         return view('ingredients.show')->with('ingredient_info', $ingredients);
@@ -103,7 +103,7 @@ class IngredientController extends Controller
     {
         $ingredients = Ingredients::where('user_id', '=', Auth::id())
             ->where('id', '=', $id)
-            ->with('available_ingredient')
+            ->with('availableIngredient')
             ->get()
             ->first();
         return view('ingredients.edit')->with('ingredients', $ingredients);
@@ -116,7 +116,7 @@ class IngredientController extends Controller
      * @param  \App\Ingredients         $ingredients
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update( Request $request, $id )
     {
         $this->validate(
             $request, [
@@ -138,7 +138,7 @@ class IngredientController extends Controller
      * @param  \App\Ingredients $ingredients
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy( $id )
     {
         $ingredients = Ingredients::find($id);
         $ingredients->delete();

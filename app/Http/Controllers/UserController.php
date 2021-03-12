@@ -38,9 +38,13 @@ class UserController extends Controller
     }
 
     /**
-     * The edit function allows user edit his own data
+     * The update function allows user save the edited data
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return response
      */
-    public function update(Request $request)
+    public function update( Request $request )
     {
         // 
         $validator = Validator::make(
@@ -63,14 +67,18 @@ class UserController extends Controller
             $user->save();
             return redirect('/')->with('success', 'User Updated');
         } else {
-            return redirect('/')->with('error', 'Your current password does not match.');
+            return redirect('/')->with('error', 'Current password does not match.');
         }
     }
 
     /**
      * The create function allows new user to create an account
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return response
      */
-    public function create(Request $request)
+    public function create( Request $request )
     {
         $validator = Validator::make(
             $request->all(), [
@@ -91,6 +99,8 @@ class UserController extends Controller
 
     /**
      * The logout function allows users out of the application
+     *
+     * @return redirect
      */
     public function logout()
     {

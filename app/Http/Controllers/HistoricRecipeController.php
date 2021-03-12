@@ -31,9 +31,11 @@ class HistoricRecipeController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index( Request $request )
     {
         $historic = new HistoricRecipes;
 
@@ -43,7 +45,7 @@ class HistoricRecipeController extends Controller
         $historic = $historic->where('user_id', '=', Auth::id());
         $historics = $historic->get();
         $totalPrice = 0;
-        foreach ($historics as $historic_price) {
+        foreach ( $historics as $historic_price ) {
             $totalPrice = $totalPrice + $historic_price->total_cost;
         }
         $historic = $historic->orderBy('created_at', 'asc')->paginate(10);

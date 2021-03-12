@@ -43,7 +43,7 @@
                                     @if(count($ingredient_list) >0)
                                         @foreach ($ingredient_list as $ingredient)
                                         <tr role="row" class="odd">
-                                            <td class="sorting_1">{!!$ingredient->available_ingredient->name!!}</td>
+                                            <td class="sorting_1">{!!$ingredient->availableIngredient->name!!}</td>
                                             <td>{!!$ingredient->quantity!!}</td>
                                             <td>
                                                 <div class="btn-group btn-group-sm">

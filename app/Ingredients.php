@@ -14,12 +14,15 @@ use App\User;
 use App\AvailableIngredients;
 
 /**
- * The Ingredients class establishes the attributes and relationship with other models
+ * The Ingredients class establishes the attributes and relationship 
+ * with other models
  */
 class Ingredients extends Model
 {
     /**
      * The users function establish that the Ingredients belongs to a user.
+     *
+     * @return Response
      */
     public function users()
     {
@@ -27,18 +30,25 @@ class Ingredients extends Model
     }
 
     /**
-    * The available_ingredient function establish that the Ingredients belongs to a 
-    * available ingredient.
-    */
-    public function available_ingredient()
+     * The availableIngredient function establish that the Ingredients belongs to a 
+     * available ingredient.
+     *
+     * @return Response
+     */
+    public function availableIngredient()
     {
         return $this->belongsTo('App\AvailableIngredients');
     }
 
     /**
-     * Tne assignFromRequest function save data comming from request in database.Ingredients
+     * Tne assignFromRequest function save data comming from request in 
+     * database.Ingredients
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return void
      */
-    public function assignFromRequest(Request $request)
+    public function assignFromRequest( Request $request )
     {
         $this->price = $request->input('price');
         $this->quantity = $request->input('quantity');

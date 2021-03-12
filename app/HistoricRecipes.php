@@ -19,6 +19,8 @@ class HistoricRecipes extends Model
 {
     /**
      * The user function establish that the historic recipes belongs to a user.
+     *
+     * @return Response
      */
     public function user()
     {
@@ -27,10 +29,15 @@ class HistoricRecipes extends Model
 
     /**
      * The dateFilter function filter the historic recipe with a given date.
+     *
+     * @param for firtering date from $from
+     * @param for firtering date to   $to
+     *
+     * @return Response
      */
-    public function dateFilter($from, $to)
+    public function dateFilter( $from, $to )
     {
-        return $this->whereBetween('created_at', array($from, $to));
+        return $this->whereBetween('created_at', array( $from, $to ));
     }
     
 }
