@@ -2,6 +2,7 @@
 /**
  * @author  Flormarys Diaz <flormarysdiaz@gmail.com>
  * @license GPLv3 (or any later version)
+ * PHP 7.3.27  
  */
 
 namespace App\Providers;
@@ -9,10 +10,10 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Broadcast;
 
-/*
-*   BroadcastServiceProvider class this provider will allow you to register the broadcast authorization 
-* routes and callbacks
-*/
+/**
+ * BroadcastServiceProvider class this provider will allow you to register the 
+ * broadcast authorization routes and callbacks
+ */
 class BroadcastServiceProvider extends ServiceProvider
 {
     /**

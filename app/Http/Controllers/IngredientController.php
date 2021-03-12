@@ -2,6 +2,7 @@
 /**
  * @author  Flormarys Diaz <flormarysdiaz@gmail.com>
  * @license GPLv3 (or any later version)
+ * PHP 7.3.27 
  */
 
 namespace App\Http\Controllers;
@@ -14,25 +15,28 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
-
-
+/**
+ * The IngredientController handle the CRUD actions for the ingredients
+ */
 class IngredientController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
+    
     /**
+     * Doc comment for parameter "$request" missin
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index( Request $request )
     {
         $ingredients = Ingredients::where('user_id', '=', Auth::id())
             ->whereHas(
                 'available_ingredient',  function ($query) use ($request) {
-                                            $query->where('name', 'like', '%'.$request->input('name').'%');
+                    $query->where('name', 'like', '%'.$request->input('name').'%');
                 }
             )->with('available_ingredient')->paginate(10);
 
@@ -47,7 +51,8 @@ class IngredientController extends Controller
     public function create()
     {
         $available_ingredients = AvailableIngredients::orderBy('name', 'asc')->get();
-        return view('ingredients.create')->with('ingredients_info', $available_ingredients);
+        return view('ingredients.create')
+                ->with('ingredients_info', $available_ingredients);
     }
 
     /**
@@ -56,12 +61,12 @@ class IngredientController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, User $user)
+    public function store( Request $request, User $user )
     {
         $this->validate(
             $request, [
-            'price' => 'required',
-            'quantity' => 'required',
+                'price' => 'required',
+                'quantity' => 'required',
             ]
         );
 
@@ -78,7 +83,7 @@ class IngredientController extends Controller
      * @param  \App\Ingredients $ingredients
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show( $id )
     {
         $ingredients = Ingredients::where('user_id', '=', Auth::id())
             ->where('id', '=', $id)

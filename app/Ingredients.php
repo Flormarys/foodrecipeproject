@@ -2,6 +2,7 @@
 /**
  * @author  Flormarys Diaz <flormarysdiaz@gmail.com>
  * @license GPLv3 (or any later version)
+ * PHP 7.3.27 
  */
 
 namespace App;
@@ -12,30 +13,31 @@ use Illuminate\Http\Request;
 use App\User;
 use App\AvailableIngredients;
 
-/*
-*   The Ingredients class establishes the attributes and relationship with other models
-*/
+/**
+ * The Ingredients class establishes the attributes and relationship with other models
+ */
 class Ingredients extends Model
 {
-    /*
-    *   The users function establish that the Ingredients belongs to a user.
-    */
+    /**
+     * The users function establish that the Ingredients belongs to a user.
+     */
     public function users()
     {
         return $this->belongsTo('App\User');
     }
 
-    /*
-    *   The available_ingredient function establish that the Ingredients belongs to a available ingredient.
+    /**
+    * The available_ingredient function establish that the Ingredients belongs to a 
+    * available ingredient.
     */
     public function available_ingredient()
     {
         return $this->belongsTo('App\AvailableIngredients');
     }
 
-    /*
-    *   The available_ingredient function establish that the Ingredients belongs to a available ingredient.
-    */
+    /**
+     * Tne assignFromRequest function save data comming from request in database.Ingredients
+     */
     public function assignFromRequest(Request $request)
     {
         $this->price = $request->input('price');

@@ -2,6 +2,7 @@
 /**
  * @author  Flormarys Diaz <flormarysdiaz@gmail.com>
  * @license GPLv3 (or any later version)
+ * PHP 7.3.27 
  */
 
 namespace App\Providers;
@@ -9,9 +10,9 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
-/*
-*   RouteServiceProvider class includes your route files within a namespace group
-*/
+/**
+ *   RouteServiceProvider class includes your route files within a namespace group
+ */
 class RouteServiceProvider extends ServiceProvider
 {
     /**

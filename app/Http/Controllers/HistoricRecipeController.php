@@ -2,6 +2,7 @@
 /**
  * @author  Flormarys Diaz <flormarysdiaz@gmail.com>
  * @license GPLv3 (or any later version)
+ * PHP 7.3.27 
  */
 
 namespace App\Http\Controllers;
@@ -14,23 +15,29 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * The HistoricRecipeController handle historics of recipes selected
+ */
 class HistoricRecipeController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Constructor use middleware for auth.
      */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request)
     {
         $historic = new HistoricRecipes;
 
-        if($request->has('dateFrom') && $request->has('dateTo')) {
+        if ($request->has('dateFrom') && $request->has('dateTo')) {
             $historic = $historic->dateFilter($request->dateFrom, $request->dateTo);
         }
         $historic = $historic->where('user_id', '=', Auth::id());

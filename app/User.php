@@ -2,6 +2,7 @@
 /**
  * @author  Flormarys Diaz <flormarysdiaz@gmail.com>
  * @license GPLv3 (or any later version)
+ * PHP 7.3.27 
  */
 
 namespace App;
@@ -13,9 +14,9 @@ use Illuminate\Database\Eloquent\Model;
 use App\Ingredients;
 use App\HistoricRecipes;
 
-/*
-*   The User class establishes the attributes and relationship with other models
-*/
+/**
+ * The User class establishes the attributes and relationship with other models
+ */
 class User extends Authenticatable
 {
     use Notifiable;
@@ -48,16 +49,20 @@ class User extends Authenticatable
     ];
 
     /**
-    * The userIngredients function establish that the user has many ingredients.
-    */
+     * The userIngredients function establish that the user has many ingredients.
+     *
+     * @return Response
+     */
     public function userIngredients()
     {
         return $this->hasMany('App\Ingredients');
     }
 
     /**
-    * The userHistoricRecipes function establish the use has many historic recipes.
-    */
+     * The userHistoricRecipes function establish the use has many historic recipes.
+     *
+     * @return Response
+     */
     public function userHistoricRecipes()
     {
         return $this->hasMany('App\HistoricRecipes');
