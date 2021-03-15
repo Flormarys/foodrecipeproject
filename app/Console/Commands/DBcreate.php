@@ -29,7 +29,7 @@ class DBcreate extends Command
      *
      * @var string
      */
-    protected $description = 'Create a new MySQL DB based on the database config file';
+    protected $description = 'Create a new MySQL DB based on the DB config file';
 
     /**
      * Create a new command instance.

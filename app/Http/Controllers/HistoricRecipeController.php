@@ -33,7 +33,7 @@ class HistoricRecipeController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index( Request $request )
     {

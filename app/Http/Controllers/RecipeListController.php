@@ -71,21 +71,21 @@ class RecipeListController extends Controller
             $missedIngredientsList = [];
             $missedQuantity = [];
             $fullIngredients = [];
-            foreach ( $recipe->usedIngredients as $ingredientRecipe ){
+            foreach ( $recipe->usedIngredients as $ingredientRecipe ) {
                 $fullIngredients[] = $ingredientRecipe->name . ", " .
                     $ingredientRecipe->amount . ", " .
                     $ingredientRecipe->unit;
 
                 if (!isset($userIngredients[$ingredientRecipe->name]) ) {
                     $countMissedIngredients++;
-                    $missedIngredientsList [] = "Name: " . $ingredientRecipe->name . ", " .
+                    $missedIngredientsList [] = "Name: " . 
+                        $ingredientRecipe->name . ", " .
                         "Quantity: " . $ingredientRecipe->amount . ", " .
                         "Unit: ". $ingredientRecipe->unit;
                 }
                 if (isset($userIngredients[$ingredientRecipe->name])  
-                    && $userIngredients[$ingredientRecipe->name] < 
-                        $ingredientRecipe->amount) 
-                {
+                    && $userIngredients[$ingredientRecipe->name] <                    $ingredientRecipe->amount
+                ) {
                         $countMissedQuantity++;
                         $missedQuantity[] = $ingredientRecipe->name . ", " .
                             $ingredientRecipe->amount . ", " .
