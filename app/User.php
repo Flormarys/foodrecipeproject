@@ -68,4 +68,9 @@ class User extends Authenticatable
         return $this->hasMany('App\HistoricRecipes');
     }
 
+    /*
+    * @param \Illuminate\Http\Request $request
+    */
+
+
 }

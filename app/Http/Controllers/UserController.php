@@ -29,6 +29,8 @@ class UserController extends Controller
 
     /**
      * The edit function allows user edit his own data
+     *
+     * @return response
      */
     public function edit()
     {
