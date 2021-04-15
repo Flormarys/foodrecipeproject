@@ -1,10 +1,15 @@
 <?php
+/**
+ * @author  Flormarys Diaz <flormarysdiaz@gmail.com>
+ * @license GPLv3 (or any later version)
+ * PHP 7.3.27
+ */
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddRecipeNameToHistoricRecipes extends Migration
+class AddRecipeLinkToHistoricRecipes extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +19,7 @@ class AddRecipeNameToHistoricRecipes extends Migration
     public function up()
     {
         Schema::table('historic_recipes', function (Blueprint $table) {
-            $table->string('recipe_name');
+            $table->string('recipe_link');
         });
     }
 

@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author  Flormarys Diaz <flormarysdiaz@gmail.com>
+ * @license GPLv3 (or any later version)
+ * PHP 7.3.27
+ */
+ 
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
@@ -39,8 +45,8 @@ class dbcreate extends Command
     public function handle()
     {
         $schemaName = $this->argument(env('DB_DATABASE')) ?: config("database.connections.mysql.database");
-        $charset = config("database.connections.mysql.charset",'utf8mb4');
-        $collation = config("database.connections.mysql.collation",'utf8mb4_unicode_ci');
+        $charset = config("database.connections.mysql.charset", 'utf8mb4');
+        $collation = config("database.connections.mysql.collation", 'utf8mb4_unicode_ci');
 
         config(["database.connections.mysql.database" => null]);
 

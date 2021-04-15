@@ -1,10 +1,15 @@
 <?php
+/**
+ * @author  Flormarys Diaz <flormarysdiaz@gmail.com>
+ * @license GPLv3 (or any later version)
+ * PHP 7.3.27
+ */
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddAvailableIngredientIdToIngredientsTable extends Migration
+class AddUnitNullableToAvailableIngredients extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +18,8 @@ class AddAvailableIngredientIdToIngredientsTable extends Migration
      */
     public function up()
     {
-        Schema::table('ingredients', function (Blueprint $table) {
-            $table->integer('available_ingredient_id');
+        Schema::table('available_ingredients', function (Blueprint $table) {
+             $table->string('unit')->nullable()->change();
         });
     }
 
@@ -25,7 +30,7 @@ class AddAvailableIngredientIdToIngredientsTable extends Migration
      */
     public function down()
     {
-        Schema::table('ingredients', function (Blueprint $table) {
+        Schema::table('available_ingredients', function (Blueprint $table) {
             //
         });
     }

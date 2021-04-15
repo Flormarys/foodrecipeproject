@@ -1,4 +1,9 @@
 <?php
+/**
+ * @author  Flormarys Diaz <flormarysdiaz@gmail.com>
+ * @license GPLv3 (or any later version)
+ * PHP 7.3.27
+ */
 
 /*
 |--------------------------------------------------------------------------
@@ -35,4 +40,3 @@ Route::get('users/edit', 'UserController@edit');
 Route::post('users/update', 'UserController@update');
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');

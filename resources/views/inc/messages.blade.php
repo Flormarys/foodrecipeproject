@@ -1,3 +1,10 @@
+<?php
+/**
+ * @author  Flormarys Diaz <flormarysdiaz@gmail.com>
+ * @license GPLv3 (or any later version)
+ * PHP 7.3.27
+ */
+
 @if(count($errors) > 0)
   @foreach ($errors->all() as $error)
     <div class="alert alert-danger">

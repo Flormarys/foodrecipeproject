@@ -1,4 +1,9 @@
 <?php
+/**
+ * @author  Flormarys Diaz <flormarysdiaz@gmail.com>
+ * @license GPLv3 (or any later version)
+ * PHP 7.3.27
+ */
 
 namespace App\Http\Controllers;
 
@@ -26,9 +31,11 @@ class IngredientController extends Controller
     public function index(Request $request)
     {
         $ingredients = Ingredients::where('user_id', '=', Auth::id())
-                                    ->whereHas('available_ingredient',  function ($query) use ($request){
-                                        $query->where('name', 'like', '%'.$request->input('name').'%');
-                                    })->with('available_ingredient')->paginate(10);
+            ->whereHas(
+                'available_ingredient',  function ($query) use ($request) {
+                                            $query->where('name', 'like', '%'.$request->input('name').'%');
+                }
+            )->with('available_ingredient')->paginate(10);
 
         return view('index')->with('ingredient_list', $ingredients);
     }
@@ -47,15 +54,17 @@ class IngredientController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, User $user)
     {
-        $this->validate($request,[
-          'price' => 'required',
-          'quantity' => 'required',
-        ]);
+        $this->validate(
+            $request, [
+            'price' => 'required',
+            'quantity' => 'required',
+            ]
+        );
 
         $ingredients = new Ingredients;
         $ingredients->assignFromRequest($request);
@@ -67,7 +76,7 @@ class IngredientController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Ingredients  $ingredients
+     * @param  \App\Ingredients $ingredients
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -83,7 +92,7 @@ class IngredientController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Ingredients  $ingredients
+     * @param  \App\Ingredients $ingredients
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -99,16 +108,18 @@ class IngredientController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Ingredients  $ingredients
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Ingredients         $ingredients
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request,[
-          'price' => 'required',
-          'quantity' => 'required',
-        ]);
+        $this->validate(
+            $request, [
+            'price' => 'required',
+            'quantity' => 'required',
+            ]
+        );
 
         $ingredients = Ingredients::find($id);
         $ingredients->price = $request->input('price');
@@ -120,7 +131,7 @@ class IngredientController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Ingredients  $ingredients
+     * @param  \App\Ingredients $ingredients
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

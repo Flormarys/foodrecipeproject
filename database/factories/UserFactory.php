@@ -1,4 +1,9 @@
 <?php
+/**
+ * @author  Flormarys Diaz <flormarysdiaz@gmail.com>
+ * @license GPLv3 (or any later version)
+ * PHP 7.3.27
+ */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 use App\User;

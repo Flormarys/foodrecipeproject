@@ -1,10 +1,15 @@
 <?php
+/**
+ * @author  Flormarys Diaz <flormarysdiaz@gmail.com>
+ * @license GPLv3 (or any later version)
+ * PHP 7.3.27
+ */
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAvailableIngredientsTable extends Migration
+class CreateIngredientsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +18,13 @@ class CreateAvailableIngredientsTable extends Migration
      */
     public function up()
     {
-        Schema::create('available_ingredients', function (Blueprint $table) {
+        Schema::create('ingredients', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('user_id');
             $table->string('name');
-            $table->integer('api_id');
+            $table->integer('price');
+            $table->integer('quantity');
+            $table->string('measure');
             $table->timestamps();
         });
     }
@@ -28,6 +36,6 @@ class CreateAvailableIngredientsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('available_ingredients');
+        Schema::dropIfExists('ingredients');
     }
 }

@@ -1,10 +1,15 @@
 <?php
+/**
+ * @author  Flormarys Diaz <flormarysdiaz@gmail.com>
+ * @license GPLv3 (or any later version)
+ * PHP 7.3.27
+ */
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DeleteNameFromIngredientsTable extends Migration
+class AddAvailableIngredientIdToIngredientsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +19,7 @@ class DeleteNameFromIngredientsTable extends Migration
     public function up()
     {
         Schema::table('ingredients', function (Blueprint $table) {
-            $table->dropColumn('name');
+            $table->integer('available_ingredient_id');
         });
     }
 

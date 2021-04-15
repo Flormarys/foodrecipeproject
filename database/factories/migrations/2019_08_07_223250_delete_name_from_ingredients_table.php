@@ -1,10 +1,15 @@
 <?php
+/**
+ * @author  Flormarys Diaz <flormarysdiaz@gmail.com>
+ * @license GPLv3 (or any later version)
+ * PHP 7.3.27
+ */
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddRecipeIdToHistoricRecipes extends Migration
+class DeleteNameFromIngredientsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +18,8 @@ class AddRecipeIdToHistoricRecipes extends Migration
      */
     public function up()
     {
-        Schema::table('historic_recipes', function (Blueprint $table) {
-            $table->integer('recipe_id');
+        Schema::table('ingredients', function (Blueprint $table) {
+            $table->dropColumn('name');
         });
     }
 
@@ -25,7 +30,7 @@ class AddRecipeIdToHistoricRecipes extends Migration
      */
     public function down()
     {
-        Schema::table('historic_recipes', function (Blueprint $table) {
+        Schema::table('ingredients', function (Blueprint $table) {
             //
         });
     }

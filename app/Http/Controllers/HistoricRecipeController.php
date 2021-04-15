@@ -1,4 +1,9 @@
 <?php
+/**
+ * @author  Flormarys Diaz <flormarysdiaz@gmail.com>
+ * @license GPLv3 (or any later version)
+ * PHP 7.3.27
+ */
 
 namespace App\Http\Controllers;
 
@@ -26,7 +31,7 @@ class HistoricRecipeController extends Controller
     {
         $historic = new HistoricRecipes;
 
-        if($request->has('dateFrom') && $request->has('dateTo')){
+        if($request->has('dateFrom') && $request->has('dateTo')) {
             $historic = $historic->dateFilter($request->dateFrom, $request->dateTo);
         }
         $historic = $historic->where('user_id', '=', Auth::id());
